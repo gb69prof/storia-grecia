@@ -1,236 +1,152 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Le città micenee – Schede</title>
-  <link rel="stylesheet" href="../css/style.css" />
+
   <style>
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #e6d5b8;
-      color: #2c2114;
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:#e6d5b8;
+      color:#2c2114;
     }
-    .top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.75rem 1rem;
-      background: linear-gradient(90deg, #3f3121, #27201a);
-      color: #f5e9d3;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.45);
+
+    .page{
+      max-width:1200px;
+      margin:0 auto;
+      padding:1rem;
     }
-    .top-bar__title-link {
-      color: inherit;
-      text-decoration: none;
-      font-weight: 600;
+
+    .breadcrumb{
+      font-size:.9rem;
+      color:#745c3b;
+      margin-bottom:.5rem;
     }
-    .top-bar__nav {
-      display: flex;
-      gap: 0.4rem;
+
+    .intro h1{
+      margin:0 0 .4rem;
+      font-size:1.6rem;
     }
-    .nav-btn {
-      border: none;
-      background: rgba(0,0,0,0.25);
-      color: #f5e9d3;
-      border-radius: 999px;
-      width: 2rem;
-      height: 2rem;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
+
+    .layout{
+      display:grid;
+      grid-template-columns:1fr 1.5fr;
+      gap:1.2rem;
+      margin-top:1rem;
     }
-    .page {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 1rem;
+
+    .map-panel{
+      background:#f1e2c5;
+      padding:.7rem;
+      border-radius:14px;
+      box-shadow:0 6px 14px rgba(0,0,0,.25);
     }
-    .breadcrumb {
-      font-size: 0.9rem;
-      color: #745c3b;
-      margin-bottom: 0.5rem;
+
+    .map-panel img{
+      width:100%;
+      border-radius:10px;
     }
-    .intro h1 {
-      margin: 0 0 0.4rem;
-      font-size: 1.6rem;
+
+    .text-panel{
+      background:#f7ecda;
+      padding:1rem 1.2rem;
+      border-radius:14px;
+      box-shadow:0 6px 14px rgba(0,0,0,.25);
     }
-    .intro p {
-      margin: 0 0 0.8rem;
-      font-size: 0.95rem;
-      color: #5a4730;
+
+    .text-panel h3{
+      margin-top:1rem;
+      margin-bottom:.2rem;
     }
-    .layout-map-schede {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.6fr);
-      gap: 1.2rem;
-      margin-top: 1rem;
-      align-items: flex-start;
-    }
-    .map-panel {
-      background: #f1e2c5;
-      border-radius: 14px;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.25);
-      border: 1px solid rgba(120,96,62,0.6);
-      padding: 0.7rem;
-    }
-    .map-panel img {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-      display: block;
-    }
-    .map-caption {
-      margin-top: 0.5rem;
-      font-size: 0.9rem;
-      color: #6b5234;
-      text-align: center;
-    }
-    .text-panel {
-      background: #f7ecda;
-      border-radius: 14px;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.25);
-      border: 1px solid rgba(120,96,62,0.6);
-      padding: 1rem 1.2rem 1.2rem;
-    }
-    .text-panel h2 {
-      margin-top: 0;
-      margin-bottom: 0.5rem;
-      font-size: 1.3rem;
-    }
-    .text-panel p {
-      margin: 0 0 0.6rem;
-      font-size: 0.95rem;
-      line-height: 1.45;
-    }
-    .city-list {
-      margin-top: 0.8rem;
-    }
-    .city-list h3 {
-      margin: 1rem 0 0.2rem;
-      font-size: 1.1rem;
-    }
-    .city-list p {
-      margin: 0 0 0.6rem;
-      font-size: 0.95rem;
-    }
-    @media (max-width: 900px) {
-      .layout-map-schede {
-        grid-template-columns: 1fr;
-      }
+
+    @media(max-width:900px){
+      .layout{grid-template-columns:1fr;}
     }
   </style>
 </head>
+
 <body>
-  <header class="top-bar">
-    <div class="top-bar__title"><a href="../index.html" class="top-bar__title-link">Storia della Grecia</a></div>
-    <nav class="top-bar__nav">
-      <button class="nav-btn" aria-label="Cerca">🔍</button>
-      <button class="nav-btn" aria-label="Percorsi tematici">🧭</button>
-      <button class="nav-btn" aria-label="Risorse">📚</button>
-    </nav>
-  </header>
 
   <main class="page">
-    <div class="breadcrumb"><span>Storia della Grecia</span> / <span>Età Micenea</span> / <span>Le città micenee</span></div>
+
+    <div class="breadcrumb">
+      Storia della Grecia / Età Micenea / Le città micenee
+    </div>
 
     <section class="intro">
       <h1>Le città della civiltà micenea</h1>
       <p>
-        La civiltà micenea si sviluppa tra il XVI e il XII secolo a.C. nella Grecia continentale. È una civiltà
-        di re-guerrieri che governano da palazzi fortificati, controllando terre, artigiani e rotte commerciali.
+        La civiltà micenea si sviluppa tra il XVI e il XII secolo a.C. nella Grecia continentale.
+        È una civiltà di re-guerrieri che governano da palazzi fortificati e controllano terre,
+        artigiani e rotte commerciali.
       </p>
+
       <p>
-        <strong>Stato:</strong> al vertice c’è il <em>wanax</em>, il re, affiancato da un’aristocrazia guerriera e da una
-        burocrazia che registra tutto su tavolette in Lineare B. Il palazzo è insieme centro politico, economico e
-        religioso.<br />
-        <strong>Economia:</strong> agricoltura, allevamento, produzione di olio, vino, tessuti e metalli sono organizzati
-        in modo centralizzato. Le merci vengono redistribuite dal palazzo e viaggiano lungo le rotte del Mediterraneo
-        orientale.<br />
-        <strong>Guerra e saccheggio:</strong> le navi micenee partecipano a spedizioni militari e predatorie. Nell’immaginario
-        greco, la guerra di Troia diventa il simbolo di questa aggressività guerriera.<br />
-        <strong>Cultura:</strong> palazzi affrescati, tombe monumentali a tholos, maschere d’oro e oggetti di lusso mostrano
-        una cultura raffinata, legata ai culti degli antenati e a divinità che saranno ereditate dalla Grecia classica.
+        <strong>Stato:</strong> al vertice c’è il <em>wanax</em>, il re, affiancato
+        da un’aristocrazia guerriera e da funzionari che registrano tutto in Lineare B. <br>
+        <strong>Economia:</strong> agricoltura, allevamento, artigianato e commercio
+        sono centralizzati nel palazzo. <br>
+        <strong>Guerra e saccheggio:</strong> spedizioni militari e pirateria
+        caratterizzano la loro espansione. <br>
+        <strong>Cultura:</strong> tombe monumentali, maschere funerarie e affreschi
+        mostrano una società ricca e gerarchica.
       </p>
     </section>
 
-    <section class="layout-map-schede">
+    <section class="layout">
+
       <div class="map-panel">
-        <img src="../img/mappa-micenea.png" alt="Mappa delle principali città micenee" />
-        <div class="map-caption">
-          Pilo, Argo, Micene, Tebe e Atene: i principali centri della Grecia micenea.
-        </div>
+        <img src="img/mappa-micenea.png"
+             alt="Mappa delle principali città micenee">
       </div>
 
-      <div class="text-panel city-list">
+      <div class="text-panel">
+
         <h2>Città, miti ed eroi</h2>
 
         <h3>Micene</h3>
         <p>
-          Micene, nel Peloponneso, è il centro più potente della civiltà micenea. Le imponenti mura ciclopiche e la
-          celebre Porta dei Leoni mostrano il carattere militare e monumentale della cittadella. Le tombe a tholos,
-          come il cosiddetto “Tesoro di Atreo”, testimoniano il potere delle dinastie locali.
-        </p>
-        <p>
-          Nella tradizione mitica, Micene è la città degli Atridi. Qui regna Agamennone, capo della spedizione achea
-          contro Troia. La sua storia è segnata da sangue e vendetta: il sacrificio della figlia Ifigenia per ottenere
-          venti favorevoli, l’assassinio al ritorno dalla guerra da parte di Clitennestra e di Egisto, la vendetta dei
-          figli Elettra e Oreste. Questi miti riflettono le tensioni interne delle corti micenee.
+          Centro più potente della Grecia micenea, famosa per le mura ciclopiche
+          e la Porta dei Leoni. Nel mito è la città di Agamennone,
+          capo della spedizione contro Troia. La saga degli Atridi
+          racconta tradimenti, sacrifici e vendette.
         </p>
 
         <h3>Pilo</h3>
         <p>
-          Pilo si trova nella Messenia, sulla costa sud-occidentale del Peloponneso. Il palazzo di Pilo, riccamente
-          decorato e ben conservato, ha restituito moltissime tavolette in Lineare B, fondamentali per capire
-          l’amministrazione micenea.
-        </p>
-        <p>
-          Nei poemi omerici Pilo è il regno di Nestore, il vecchio re saggio che partecipa alla guerra di Troia.
-          Nestore incarna la memoria del passato miceneo: nei suoi discorsi ricorda battaglie antiche e consiglia i
-          più giovani, come Achille e Telemaco, collegando la storia degli eroi alla tradizione della corte.
+          Il palazzo di Pilo ha restituito molte tavolette in Lineare B.
+          Nei poemi omerici è il regno di Nestore, il vecchio re saggio
+          che parte per Troia e consiglia gli altri eroi.
         </p>
 
         <h3>Argo</h3>
         <p>
-          Argo, nell’Argolide, è un altro importante centro della Grecia micenea, spesso in rapporto di rivalità o
-          alleanza con Micene. L’area di Argo controlla una pianura fertile e rotte che collegano il Peloponneso
-          alle isole del Golfo Saronico.
-        </p>
-        <p>
-          Nel mito, Argo è legata a più tradizioni eroiche. Qui regna Diomede, uno dei più valorosi guerrieri achei
-          sotto le mura di Troia. Un’altra tradizione collega Argo alla nave Argo degli Argonauti, guidata da Giasone
-          alla ricerca del vello d’oro: un’impresa che riflette l’immagine di una Grecia micenea proiettata verso il
-          mare e le lontane regioni del Caucaso.
+          Importante centro dell’Argolide. Nei miti è legata a Diomede,
+          uno dei più coraggiosi eroi achei, e alla tradizione degli Argonauti.
         </p>
 
         <h3>Tebe</h3>
         <p>
-          Tebe si trova in Beozia, a nord dell’Attica. Gli scavi hanno messo in luce tracce di un importante centro
-          palaziale miceneo, con archivi in Lineare B che documentano una complessa amministrazione delle terre e delle
-          risorse.
-        </p>
-        <p>
-          I miti tebani sono tra i più drammatici della Grecia. Cadmo, fondatore della città, uccide il drago di Ares
-          e semina i suoi denti, da cui nascono guerrieri armati: un’immagine che lega la nascita di Tebe alla violenza.
-          Più tardi la saga di Edipo e la guerra dei Sette contro Tebe mostrano una città lacerata da maledizioni e
-          conflitti dinastici, che gli antichi collegavano all’età eroica e quindi al mondo miceneo.
+          Grande centro palaziale della Beozia. I miti di Cadmo,
+          Edipo e della guerra dei Sette contro Tebe mostrano una città
+          segnata da maledizioni e conflitti dinastici.
         </p>
 
         <h3>Atene</h3>
         <p>
-          Atene, nell’Attica, è in età micenea un centro importante ma non ancora la grande potenza della Grecia
-          classica. La tradizione archeologica mostra fortificazioni e un nucleo palaziale sull’Acropoli.
+          In età micenea è un centro fortificato dell’Attica.
+          Il mito di Teseo racconta la liberazione dal tributo imposto
+          da Minosse a Creta e l’uccisione del Minotauro.
         </p>
-        <p>
-          Il mito più legato all’età micenea è quello di Teseo. L’eroe ateniese unifica l’Attica e libera la città dal
-          tributo imposto da Minosse di Creta: ogni anno giovani ateniesi venivano inviati nel labirinto, dove il
-          Minotauro li divorava. Uccidendo il mostro con l’aiuto di Arianna, Teseo rappresenta la liberazione di Atene
-          dal dominio minoico e il passaggio a una nuova fase in cui le città micenee affermano la loro autonomia.
-        </p>
+
       </div>
+
     </section>
+
   </main>
+
 </body>
 </html>
+
