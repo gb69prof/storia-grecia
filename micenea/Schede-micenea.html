@@ -139,13 +139,27 @@
       margin-top: 0.7rem;
     }
 
+    .city-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
     .city-list h3 {
       margin: 0.9rem 0 0.2rem;
       font-size: 1.08rem;
     }
 
-    .city-list p {
-      margin: 0 0 0.55rem;
+    .icon-link {
+      margin-left: 0.5rem;
+      text-decoration: none;
+      background: #cfa56b;
+      border: 1px solid rgba(0,0,0,0.2);
+      color: #2c2114;
+      font-size: 0.8rem;
+      padding: 0.2rem 0.45rem;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
     }
 
     @media (max-width: 900px) {
@@ -218,7 +232,10 @@
       <div class="text-panel city-list">
         <h2>Città, miti ed eroi</h2>
 
-        <h3>Micene</h3>
+        <div class="city-header">
+          <h3>Micene</h3>
+          <a class="icon-link" href="Agamennone.html">Approfondisci →</a>
+        </div>
         <p>
           Micene, nel Peloponneso, è il centro più potente della civiltà micenea. Le imponenti mura ciclopiche e la
           celebre Porta dei Leoni mostrano il carattere militare e monumentale della cittadella. Le tombe a tholos,
