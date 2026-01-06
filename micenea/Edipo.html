@@ -1,45 +1,905 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>La storia di Edipo</title>
-<style>
-body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#e6d5b8;margin:0;color:#2c2114}
-.page{max-width:1200px;margin:0 auto;padding:1rem 1.2rem 2rem}
-.layout{display:grid;grid-template-columns:1.1fr 1.7fr;gap:1.2rem;margin-top:1rem}
-.panel{background:#f7ecda;border-radius:16px;box-shadow:0 8px 18px rgba(0,0,0,.3);padding:1rem 1.2rem}
-img{max-width:100%;border-radius:14px}
-@media(max-width:900px){.layout{grid-template-columns:1fr}}
-</style>
+  <meta charset="UTF-8">
+  <title>La storia di Edipo – Hybris e Nemesi</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-soft: #111827;
+      --bg-elevated: #020617;
+      --accent: #f97316;
+      --accent-soft: rgba(249,115,22,0.12);
+      --text: #e5e7eb;
+      --text-soft: #9ca3af;
+      --border-soft: #1f2937;
+      --card-radius: 18px;
+      --shadow-soft: 0 18px 35px rgba(15,23,42,0.6);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 16px;
+    }
+
+    .app-shell {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, rgba(15,23,42,0.96), rgba(2,6,23,0.98));
+      border-radius: 26px;
+      border: 1px solid rgba(148,163,184,0.18);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: calc(100vh - 32px);
+    }
+
+    header {
+      padding: 18px 22px 8px;
+      border-bottom: 1px solid rgba(148,163,184,0.18);
+      backdrop-filter: blur(18px);
+      background: radial-gradient(circle at top left, rgba(248,250,252,0.06), transparent 60%);
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .logo-pill {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #fed7aa, #fb923c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 0 0 3px rgba(248,250,252,0.12);
+    }
+
+    h1 {
+      font-size: 1.45rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      font-size: 0.88rem;
+      color: var(--text-soft);
+      margin-top: 3px;
+    }
+
+    .tag-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      padding: 4px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(249,115,22,0.4);
+      background: rgba(15,23,42,0.7);
+      color: #fed7aa;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.8fr) minmax(0, 1fr);
+      gap: 0;
+      min-height: 0;
+      flex: 1;
+    }
+
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Left column: main content */
+    .main-panel {
+      border-right: 1px solid rgba(31,41,55,0.85);
+      padding: 10px 20px 18px;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    @media (max-width: 900px) {
+      .main-panel {
+        border-right: none;
+        border-bottom: 1px solid rgba(31,41,55,0.85);
+      }
+    }
+
+    .top-nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(55,65,81,0.9);
+      background: radial-gradient(circle at top, rgba(31,41,55,0.95), rgba(15,23,42,0.95));
+      color: var(--text-soft);
+      font-size: 0.8rem;
+      padding: 6px 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.18s ease-out;
+      white-space: nowrap;
+    }
+
+    .nav-btn span.icon {
+      font-size: 1rem;
+    }
+
+    .nav-btn.active,
+    .nav-btn:hover {
+      border-color: rgba(249,115,22,0.9);
+      color: #fed7aa;
+      background: radial-gradient(circle at top left, rgba(249,115,22,0.22), rgba(15,23,42,0.98));
+      transform: translateY(-1px);
+    }
+
+    .scroll-area {
+      overflow-y: auto;
+      padding-right: 4px;
+      scroll-behavior: smooth;
+    }
+
+    .section {
+      margin-bottom: 24px;
+      padding: 14px 14px 16px;
+      border-radius: var(--card-radius);
+      background: radial-gradient(circle at top left, rgba(15,23,42,0.9), rgba(2,6,23,0.98));
+      border: 1px solid rgba(30,64,175,0.55);
+      box-shadow: 0 12px 28px rgba(15,23,42,0.9);
+    }
+
+    .section h2 {
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 8px;
+      color: #f9fafb;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section h2::before {
+      content: "";
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(to right, #fb923c, transparent);
+    }
+
+    .section h3 {
+      font-size: 0.96rem;
+      margin-top: 10px;
+      margin-bottom: 4px;
+      color: #e5e7eb;
+    }
+
+    .section p {
+      font-size: 0.9rem;
+      line-height: 1.55;
+      color: var(--text-soft);
+      margin-bottom: 7px;
+    }
+
+    .section ul {
+      margin-left: 16px;
+      margin-bottom: 8px;
+    }
+
+    .section ul li {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--text-soft);
+      margin-bottom: 3px;
+    }
+
+    .pill-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: #9ca3af;
+      margin-bottom: 6px;
+    }
+
+    .pill-label.hybris {
+      border-color: rgba(248,113,113,0.7);
+      color: #fecaca;
+    }
+
+    .pill-label.nemesi {
+      border-color: rgba(56,189,248,0.7);
+      color: #bae6fd;
+    }
+
+    .highlight-box {
+      border-radius: 14px;
+      border: 1px dashed rgba(148,163,184,0.7);
+      background: rgba(15,23,42,0.85);
+      padding: 9px 10px;
+      margin-top: 6px;
+      font-size: 0.86rem;
+      color: #e5e7eb;
+    }
+
+    .highlight-box strong {
+      color: #fed7aa;
+    }
+
+    /* Genealogia table */
+    .table-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .chip-btn {
+      border-radius: 999px;
+      border: 1px solid rgba(55,65,81,0.9);
+      background: rgba(15,23,42,0.9);
+      color: var(--text-soft);
+      font-size: 0.78rem;
+      padding: 5px 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.18s ease-out;
+    }
+
+    .chip-btn.active {
+      border-color: rgba(249,115,22,0.9);
+      background: var(--accent-soft);
+      color: #fed7aa;
+    }
+
+    .gene-table-wrapper {
+      border-radius: 14px;
+      border: 1px solid rgba(31,41,55,0.9);
+      overflow: hidden;
+      max-height: 320px;
+      overflow-y: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+
+    thead {
+      position: sticky;
+      top: 0;
+      background: rgba(15,23,42,0.98);
+      backdrop-filter: blur(10px);
+    }
+
+    th, td {
+      padding: 8px 9px;
+      border-bottom: 1px solid rgba(31,41,55,0.9);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.75rem;
+      color: #9ca3af;
+    }
+
+    tr:nth-child(even) td {
+      background: rgba(15,23,42,0.9);
+    }
+
+    .col-personaggio {
+      font-weight: 600;
+      color: #e5e7eb;
+      width: 110px;
+      white-space: nowrap;
+    }
+
+    .col-hybris {
+      border-left: 2px solid rgba(248,113,113,0.7);
+    }
+
+    .col-nemesi {
+      border-left: 2px solid rgba(56,189,248,0.7);
+    }
+
+    .col-trasm {
+      border-left: 2px solid rgba(129,140,248,0.7);
+    }
+
+    tr.filtered-out {
+      opacity: 0.18;
+    }
+
+    /* Right column: focus + vocabolario */
+    .side-panel {
+      padding: 12px 18px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: radial-gradient(circle at top, rgba(15,23,42,0.9), rgba(0,0,0,0.9));
+    }
+
+    .card {
+      border-radius: var(--card-radius);
+      border: 1px solid rgba(55,65,81,0.9);
+      background: radial-gradient(circle at top, rgba(15,23,42,0.96), rgba(2,6,23,0.98));
+      padding: 12px 13px 13px;
+      box-shadow: 0 10px 26px rgba(15,23,42,0.9);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      gap: 10px;
+    }
+
+    .card-title {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #e5e7eb;
+    }
+
+    .badge {
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(249,115,22,0.18);
+      color: #fed7aa;
+      border: 1px solid rgba(249,115,22,0.7);
+      white-space: nowrap;
+    }
+
+    .card p {
+      font-size: 0.86rem;
+      line-height: 1.5;
+      color: var(--text-soft);
+    }
+
+    .mini-list {
+      margin-top: 5px;
+      padding-left: 14px;
+    }
+
+    .mini-list li {
+      font-size: 0.84rem;
+      color: var(--text-soft);
+      margin-bottom: 2px;
+    }
+
+    .glossary-item {
+      margin-bottom: 7px;
+    }
+
+    .glossary-item strong {
+      color: #e5e7eb;
+      font-size: 0.86rem;
+    }
+
+    .glossary-item p {
+      margin-left: 4px;
+    }
+
+    .divider-label {
+      text-transform: uppercase;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      color: #6b7280;
+      margin: 4px 0 2px;
+    }
+
+    .footnote {
+      font-size: 0.72rem;
+      color: #6b7280;
+      margin-top: 6px;
+      border-top: 1px dashed rgba(55,65,81,0.9);
+      padding-top: 5px;
+    }
+
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(15,23,42,0.9);
+      border-radius: 999px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(55,65,81,0.9);
+      border-radius: 999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(75,85,99,0.9);
+    }
+  </style>
 </head>
 <body>
-<main class="page">
-<h1>La storia di Edipo</h1>
-<section class="layout">
-<div class="panel">
-<img src="Img/edipo.png" alt="Edipo e Antigone">
-</div>
-<div class="panel">
-<h2>Antefatto mitologico</h2>
-<p>Edipo era figlio di Laio e Giocasta, re e regina di Tebe. Poiché non avevano eredi, consultarono l’oracolo di Delfi. La pizia annunciò una terribile profezia: il loro figlio, una volta adulto, avrebbe ucciso il padre e sposato la madre. Inorriditi, decisero di abbandonare il neonato a un pastore, ordinandogli di ucciderlo. Ma il pastore, impietosito, affidò il bambino a un collega, che lo portò al re di Corinto, Polibo, privo di figli. Edipo crebbe ignaro delle sue origini. Divenuto adulto, si recò a Delfi per conoscere il proprio destino. La pizia gli confermò la profezia: avrebbe ucciso il padre e sposato la madre. Per evitarlo, Edipo decise di non tornare più a Corinto, convinto di proteggere i suoi genitori adottivi. Così facendo, però, sfidò il Fato (hybris).</p>
+  <div class="app-shell">
+    <header>
+      <div class="header-top">
+        <div class="logo-pill" title="Edipo">
+          👁️
+        </div>
+        <div>
+          <h1>La storia di Edipo &middot; Hybris e Nemesi</h1>
+          <div class="subtitle">
+            Una web app didattica sulla tragedia greca, tra destino, colpa e legge morale.
+          </div>
+          <div class="tag-row">
+            <span class="tag">Tragedia greca</span>
+            <span class="tag">Hybris · Nemesi</span>
+            <span class="tag">Edipo &amp; Antigone</span>
+          </div>
+        </div>
+      </div>
+    </header>
 
-<h2>L’incontro fatale</h2>
-<p>Durante il viaggio, a un incrocio, Edipo ebbe un violento alterco con il capo di una carovana, che pretendeva il passo. Lo scontro degenerò e Edipo lo uccise: senza saperlo, aveva tolto la vita a Laio, suo vero padre (hybris).</p>
+    <div class="layout">
+      <!-- COLONNA SINISTRA: TESTO PRINCIPALE -->
+      <div class="main-panel">
+        <div class="top-nav">
+          <button class="nav-btn active" data-target="sez-edipo">
+            <span class="icon">📜</span><span>Storia di Edipo</span>
+          </button>
+          <button class="nav-btn" data-target="sez-genealogia">
+            <span class="icon">🌋</span><span>Genealogia &amp; colpa</span>
+          </button>
+          <button class="nav-btn" data-target="sez-continua">
+            <span class="icon">⚔️</span><span>Eteocle, Polinice, Antigone</span>
+          </button>
+        </div>
 
-<h2>L’enigma della Sfinge</h2>
-<p>Proseguendo il cammino, Edipo giunse a Tebe, città assediata dalla Sfinge. La creatura impediva l’accesso ponendo un indovinello mortale: «Qual è l’animale che al mattino cammina su quattro zampe, a mezzogiorno su due e alla sera su tre?». Edipo rispose con prontezza: «L’uomo». La Sfinge, sconfitta, si tolse la vita. La città, riconoscente, lo incoronò re e gli diede in sposa Giocasta, la regina rimasta vedova. Così, senza saperlo, Edipo sposò sua madre. Da quell’unione nacquero Eteocle, Polinice, Antigone e Ismene.</p>
+        <div class="scroll-area" id="scroll-area">
+          <!-- SEZIONE 1 -->
+          <section class="section" id="sez-edipo">
+            <h2>La storia di Edipo e le leggi fondamentali dell’antica Grecia</h2>
 
-<h2>Edipo re: la Nemesi</h2>
-<p>Dopo anni di prosperità, Tebe fu colpita da una terribile pestilenza (nemesi). Edipo inviò Creonte, fratello di Giocasta, a consultare l’oracolo. La risposta fu chiara: la città era punita perché l’assassino del re precedente non era stato scoperto. Determinato a far luce sul delitto, Edipo avviò un’indagine serrata, nonostante l’indovino Tiresia lo avesse messo in guardia. Alla fine, la verità esplose: Edipo stesso era l’assassino di Laio e il marito di sua madre. Giocasta, disperata, si tolse la vita (nemesi). Edipo, accecato dal dolore e dal senso di colpa, si trafisse gli occhi con le fibbie delle vesti della moglie-madre, scegliendo la cecità come punizione (nemesi). La tragedia si chiude con Edipo che abbandona Tebe, cieco e disperato, accompagnato dalla figlia Antigone.</p>
+            <div class="pill-label hybris">Hybris · Nemesi</div>
+            <p class="highlight-box">
+              <strong>Hybris</strong> è la tracotanza dell’uomo che crede di poter sfuggire al destino e superare i limiti imposti dagli dèi.<br>
+              <strong>Nemesi</strong> è la giustizia divina che punisce l’eccesso e ristabilisce l’ordine violato.
+            </p>
 
-<h2>Eteocle e Polinice</h2>
-<p>Dopo la cacciata di Edipo, i suoi figli Eteocle e Polinice si trovarono a dover governare Tebe. Per evitare conflitti, stabilirono un patto: regnare a turno, un anno ciascuno. Ma quando arrivò il momento di cedere il potere, Eteocle rifiutò di abbandonare il trono. Polinice, sentendosi tradito, cercò appoggio all’esterno e si alleò con altri principi greci, dando vita alla spedizione dei Sette contro Tebe. Lo scontro fu inevitabile: i due fratelli si affrontarono in duello sotto le mura della città. La tragedia si compì quando entrambi caddero trafitti, vittime della stessa maledizione che gravava sulla loro stirpe.</p>
+            <h3>Antefatto mitologico</h3>
+            <p>
+              Edipo era figlio di Laio e Giocasta, re e regina di Tebe. Poiché non avevano eredi, consultarono l’oracolo di Delfi.
+              La pizia annunciò una terribile profezia: il loro figlio, una volta adulto, avrebbe ucciso il padre e sposato la madre.
+              Inorriditi, decisero di abbandonare il neonato a un pastore, ordinandogli di ucciderlo. Ma il pastore, impietosito, affidò il bambino a un collega,
+              che lo portò al re di Corinto, Polibo, privo di figli. Edipo crebbe ignaro delle sue origini.
+            </p>
+            <p>
+              Divenuto adulto, si recò a Delfi per conoscere il proprio destino. La pizia gli confermò la profezia: avrebbe ucciso il padre e sposato la madre.
+              Per evitarlo, Edipo decise di non tornare più a Corinto, convinto di proteggere i suoi genitori adottivi. Così facendo, però, sfidò il Fato (hybris).
+            </p>
 
-<h2>La tragedia di Antigone</h2>
-<p>Dopo la morte di Eteocle e Polinice, caduti l’uno contro l’altro nella guerra fratricida, il governo di Tebe passò nelle mani di Creonte, fratello di Giocasta. Creonte emanò un decreto durissimo: Eteocle, che aveva difeso la città, sarebbe stato onorato con una sepoltura solenne, mentre Polinice, considerato traditore, sarebbe rimasto insepolto. Antigone decise di trasgredire l’ordine del re e di obbedire alle leggi non scritte degli dèi.</p>
-</div>
-</section>
-</main>
+            <h3>L’incontro fatale</h3>
+            <p>
+              Durante il viaggio, a un incrocio, Edipo ebbe un violento alterco con il capo di una carovana, che pretendeva il passo.
+              Lo scontro degenerò e Edipo lo uccise: senza saperlo, aveva tolto la vita a Laio, suo vero padre (hybris).
+            </p>
+
+            <h3>L’enigma della Sfinge</h3>
+            <p>
+              Proseguendo il cammino, Edipo giunse a Tebe, città assediata dalla Sfinge. La creatura impediva l’accesso ponendo un indovinello mortale:
+              «Qual è l’animale che al mattino cammina su quattro zampe, a mezzogiorno su due e alla sera su tre?». Edipo rispose con prontezza: «L’uomo».
+              La Sfinge, sconfitta, si tolse la vita. La città, riconoscente, lo incoronò re e gli diede in sposa Giocasta, la regina rimasta vedova.
+              Così, senza saperlo, Edipo sposò sua madre. Da quell’unione nacquero Eteocle, Polinice, Antigone e Ismene.
+            </p>
+
+            <h3>Edipo re: la Nemesi</h3>
+            <p>
+              Dopo anni di prosperità, Tebe fu colpita da una terribile pestilenza (nemesi). Edipo inviò Creonte, fratello di Giocasta,
+              a consultare l’oracolo. La risposta fu chiara: la città era punita perché l’assassino del re precedente non era stato scoperto.
+              Determinato a far luce sul delitto, Edipo avviò un’indagine serrata, nonostante l’indovino Tiresia lo avesse messo in guardia.
+            </p>
+            <p>
+              Alla fine, la verità esplose: Edipo stesso era l’assassino di Laio e il marito di sua madre. Giocasta, disperata, si tolse la vita (nemesi).
+              Edipo, accecato dal dolore e dal senso di colpa, si trafisse gli occhi con le fibbie delle vesti della moglie-madre, scegliendo la cecità come punizione (nemesi).
+              La tragedia si chiude con Edipo che abbandona Tebe, cieco e disperato, accompagnato dalla figlia Antigone.
+            </p>
+
+            <h3>Significato morale</h3>
+            <p>
+              Il mito di Edipo mette in luce due principi fondamentali della cultura greca:
+            </p>
+            <ul>
+              <li><strong>Hybris</strong>: la tracotanza dell’uomo che crede di poter sfuggire al destino e superare i limiti imposti dagli dèi.</li>
+              <li><strong>Nemesi</strong>: la giustizia divina che punisce l’eccesso e ristabilisce l’ordine violato.</li>
+            </ul>
+            <p>
+              La vicenda di Edipo diventa così un monito universale: nessuno può sottrarsi al destino, e chi tenta di sfidarlo con superbia
+              ne paga inevitabilmente le conseguenze.
+            </p>
+
+            <h3>Saperi irrinunciabili</h3>
+            <ul>
+              <li>La storia di Edipo rappresenta il modello della tragedia greca: l’uomo è impotente di fronte al destino.</li>
+              <li>I concetti di hybris e nemesi esprimono la visione etica e religiosa della Grecia antica.</li>
+              <li>L’eroe tragico non è malvagio: cade perché ignora i propri limiti e tenta di sfidare gli dèi.</li>
+              <li>Sofocle, con l’<em>Edipo re</em>, ha offerto la versione più celebre e drammatica di questo mito.</li>
+              <li>Il mito di Edipo continua a essere attuale come riflessione sul rapporto tra libertà umana e destino.</li>
+            </ul>
+
+            <h3>Vocabolario dei termini chiave</h3>
+            <ul>
+              <li><strong>Oracolo di Delfi</strong>: il più importante santuario della Grecia antica, consacrato ad Apollo, dove la pizia rivelava i responsi divini.</li>
+              <li><strong>Pizia</strong>: sacerdotessa di Apollo che pronunciava le profezie.</li>
+              <li><strong>Sfinge</strong>: creatura mostruosa (donna, leone e uccello) che poneva enigmi mortali.</li>
+              <li><strong>Hybris</strong>: superbia eccessiva dell’uomo che tenta di superare i limiti imposti dagli dèi.</li>
+              <li><strong>Nemesi</strong>: la punizione divina che colpisce chi ha commesso hybris.</li>
+              <li><strong>Fato</strong>: il destino ineluttabile, cui nessuno può sottrarsi.</li>
+            </ul>
+          </section>
+
+          <!-- SEZIONE 2: GENEALOGIA -->
+          <section class="section" id="sez-genealogia">
+            <h2>Hybris e Nemesi nella genealogia di Edipo</h2>
+
+            <div class="table-toolbar">
+              <button class="chip-btn active" data-filter="tutti">Tutti i personaggi</button>
+              <button class="chip-btn" data-filter="hybris">Focus hybris</button>
+              <button class="chip-btn" data-filter="nemesi">Focus nemesi</button>
+              <button class="chip-btn" data-filter="trasm">Trasmissione della colpa</button>
+            </div>
+
+            <div class="gene-table-wrapper">
+              <table id="gene-table">
+                <thead>
+                  <tr>
+                    <th>Personaggio</th>
+                    <th class="col-hybris">Hybris (peccato di tracotanza)</th>
+                    <th class="col-nemesi">Nemesi (punizione)</th>
+                    <th class="col-trasm">Trasmissione della colpa</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="col-personaggio">Laio</td>
+                    <td class="col-hybris">
+                      Vuole sfuggire al Fato abbandonando il figlio; viola i vincoli divini di ospitalità.
+                    </td>
+                    <td class="col-nemesi">
+                      Viene ucciso proprio dal figlio destinato a colpirlo.
+                    </td>
+                    <td class="col-trasm">
+                      La sua hybris ricade su Edipo, che eredita una vita segnata dalla profezia.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="col-personaggio">Giocasta</td>
+                    <td class="col-hybris">
+                      Sposa Edipo, trasgredendo inconsapevolmente le leggi divine e umane (incesto).
+                    </td>
+                    <td class="col-nemesi">
+                      Si suicida quando scopre la verità.
+                    </td>
+                    <td class="col-trasm">
+                      La maledizione passa ai figli, nati da un’unione incestuosa.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="col-personaggio">Edipo</td>
+                    <td class="col-hybris">
+                      Crede di poter eludere la profezia; uccide Laio in superbia; sposa Giocasta.
+                    </td>
+                    <td class="col-nemesi">
+                      Scopre di aver realizzato la profezia, si acceca ed è esiliato.
+                    </td>
+                    <td class="col-trasm">
+                      I figli ripetono i suoi errori: violenza, ribellione, sfida alla legge.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="col-personaggio">Eteocle</td>
+                    <td class="col-hybris">
+                      Non rispetta il patto con il fratello per la successione al trono.
+                    </td>
+                    <td class="col-nemesi">
+                      Muore in duello fratricida contro Polinice.
+                    </td>
+                    <td class="col-trasm">
+                      La colpa continua come guerra intestina, segno della maledizione ereditaria.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="col-personaggio">Polinice</td>
+                    <td class="col-hybris">
+                      Muove guerra alla sua città con i Sette contro Tebe.
+                    </td>
+                    <td class="col-nemesi">
+                      Muore in duello fratricida contro Eteocle.
+                    </td>
+                    <td class="col-trasm">
+                      Condivide la stessa hybris del fratello, eco dell’incesto originario.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="col-personaggio">Antigone</td>
+                    <td class="col-hybris">
+                      Sfida la legge del re (Creonte), anteponendo le leggi divine.
+                    </td>
+                    <td class="col-nemesi">
+                      Viene sepolta viva e muore.
+                    </td>
+                    <td class="col-trasm">
+                      Pur nobile, anche lei è travolta dalla maledizione di sangue.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="col-personaggio">Ismene</td>
+                    <td class="col-hybris">
+                      Non manifesta apertamente hybris: sceglie la prudenza.
+                    </td>
+                    <td class="col-nemesi">
+                      Sopravvive ma segnata dalla vergogna della stirpe.
+                    </td>
+                    <td class="col-trasm">
+                      La sua vita porta comunque l’ombra della maledizione familiare.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="col-personaggio">Creonte</td>
+                    <td class="col-hybris">
+                      Pretende di imporre la legge della polis sulla legge divina.
+                    </td>
+                    <td class="col-nemesi">
+                      Perde moglie e figlio, resta solo.
+                    </td>
+                    <td class="col-trasm">
+                      Non appartiene al sangue di Edipo, ma paga il contatto con la genealogia maledetta.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p class="highlight-box" style="margin-top:10px;">
+              <strong>Idea chiave:</strong> nella genealogia di Edipo la colpa non è solo individuale:
+              si trasmette, si deforma, riappare in forme nuove (guerra, tradimento, rigidità della legge).
+            </p>
+          </section>
+
+          <!-- SEZIONE 3: CONTINUA LA STORIA -->
+          <section class="section" id="sez-continua">
+            <h2>Come continua la storia? Eteocle, Polinice e Antigone</h2>
+
+            <h3>Eteocle e Polinice</h3>
+            <p>
+              Dopo la cacciata di Edipo, i suoi figli Eteocle e Polinice si trovarono a dover governare Tebe.
+              Per evitare conflitti, stabilirono un patto: regnare a turno, un anno ciascuno. Ma quando arrivò il momento di cedere il potere,
+              Eteocle rifiutò di abbandonare il trono. Polinice, sentendosi tradito, cercò appoggio all’esterno e si alleò con altri principi greci,
+              dando vita alla spedizione dei Sette contro Tebe.
+            </p>
+            <p>
+              Lo scontro fu inevitabile: i due fratelli si affrontarono in duello sotto le mura della città.
+              La tragedia si compì quando entrambi caddero trafitti, vittime della stessa maledizione che gravava sulla loro stirpe.
+              La nemesi divina si abbatté ancora una volta sulla discendenza di Edipo: l’avidità di potere,
+              la rottura del patto e la hybris fraterna portarono alla rovina. La guerra fratricida non solo spense i due eredi,
+              ma lasciò Tebe segnata dal sangue dei suoi stessi principi.
+            </p>
+
+            <h3>La tragedia di Antigone: la voce della pietà e della coscienza</h3>
+            <p>
+              Dopo la morte di Eteocle e Polinice, caduti l’uno contro l’altro nella guerra fratricida, il governo di Tebe passò nelle mani di Creonte,
+              fratello di Giocasta. Creonte si trovò di fronte a una città sconvolta e decise di affermare con forza la propria autorità.
+              Per farlo emanò un decreto durissimo: Eteocle, che aveva difeso la città, sarebbe stato onorato con una sepoltura solenne,
+              mentre Polinice, considerato traditore per aver guidato l’esercito nemico, sarebbe rimasto insepolto, esposto ai corvi e ai cani.
+            </p>
+            <p>
+              Per i Greci, il destino del corpo dopo la morte era fondamentale: la sepoltura garantiva la pace eterna dell’anima e il suo passaggio nel regno dei morti.
+              Negare il funerale significava condannare l’anima a vagare senza pace. Il decreto di Creonte, dunque, non era solo un atto politico,
+              ma un’onta religiosa.
+            </p>
+            <p>
+              Antigone, sorella dei due caduti, non poté accettare questa decisione. Per lei, le leggi non scritte degli dèi erano superiori
+              a qualsiasi legge stabilita dagli uomini. Seppellire i morti era un dovere sacro che nessuna autorità terrena poteva cancellare.
+              Per questo, pur sapendo di rischiare la vita, Antigone decise di compiere il rito funebre per Polinice.
+              Di nascosto cosparse il suo corpo di polvere e lo onorò secondo i riti tradizionali.
+            </p>
+            <p>
+              Scoperta dalle guardie, Antigone fu condotta davanti a Creonte. La giovane non negò il suo gesto: anzi, rivendicò con coraggio la sua scelta,
+              dichiarando di aver obbedito alle leggi eterne degli dèi, che valgono più di qualsiasi decreto umano.
+              Creonte, irremovibile, la condannò a essere sepolta viva in una grotta.
+            </p>
+            <p>
+              La tragedia si aggravò quando Emone, figlio di Creonte e promesso sposo di Antigone, tentò di salvarla. Ma il destino si compì:
+              Antigone si tolse la vita nella sua prigione sotterranea. Quando Emone scoprì la morte dell’amata, si uccise a sua volta.
+              Anche la moglie di Creonte, Euridice, sopraffatta dal dolore, si suicidò. Così la rigidità del re portò rovina alla sua stessa casa,
+              realizzando la nemesi.
+            </p>
+
+            <h3>Antigone come simbolo</h3>
+            <p>
+              La figura di Antigone è diventata nei secoli un simbolo universale. La sua vicenda non è solo il racconto di una giovane donna fedele ai suoi affetti,
+              ma l’esempio eterno del conflitto tra due principi opposti:
+            </p>
+            <ul>
+              <li>da un lato la legge morale, fondata sulla coscienza, la pietà e le leggi divine;</li>
+              <li>dall’altro la legge positiva, scritta dagli uomini e imposta dallo Stato.</li>
+            </ul>
+            <p>
+              Antigone sceglie la legge morale, accettando di morire per restare fedele a ciò che ritiene giusto.
+              Per questo, ancora oggi, il suo nome rappresenta la lotta contro le ingiustizie delle leggi umane
+              quando esse entrano in contrasto con i valori eterni della coscienza e della giustizia divina.
+            </p>
+
+            <h3>Saperi irrinunciabili</h3>
+            <ul>
+              <li>Creonte proibì la sepoltura di Polinice, decretandone l’infamia.</li>
+              <li>Antigone trasgredì la legge dello Stato per obbedire alla legge degli dèi.</li>
+              <li>Per questo fu condannata a morire, diventando simbolo di fedeltà ai valori supremi.</li>
+              <li>La sua morte trascinò nella rovina l’intera casa di Creonte.</li>
+              <li>Antigone è il simbolo del conflitto tra legge morale e legge positiva.</li>
+            </ul>
+
+            <h3>Vocabolario essenziale</h3>
+            <ul>
+              <li><strong>Legge morale</strong>: norma universale fondata sulla coscienza e sulla pietà.</li>
+              <li><strong>Legge positiva</strong>: legge scritta, emanata dallo Stato.</li>
+              <li><strong>Decreto</strong>: ordine ufficiale imposto da un’autorità politica.</li>
+              <li><strong>Pietà</strong>: rispetto religioso e morale verso gli dèi, i defunti e i familiari.</li>
+              <li><strong>Nemesi</strong>: punizione inevitabile che ristabilisce l’ordine divino.</li>
+            </ul>
+          </section>
+        </div>
+      </div>
+
+      <!-- COLONNA DESTRA: FOCUS E GLOSSARIO RAPIDO -->
+      <aside class="side-panel">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Focus concettuale</div>
+            <div class="badge">Hybris · Nemesi</div>
+          </div>
+          <p>
+            La tragedia di Edipo e Antigone è una lunga catena di <strong>scelte</strong> e
+            <strong>limiti superati</strong>. Ogni volta che un personaggio crede di poter
+            piegare il destino, la <em>nemesi</em> ristabilisce l’ordine.
+          </p>
+          <ul class="mini-list">
+            <li><strong>Hybris</strong>: pensare di poter fare tutto.</li>
+            <li><strong>Nemesi</strong>: il conto che arriva, per tutti.</li>
+            <li><strong>Antigone</strong>: quando la coscienza dice “no” alla legge.</li>
+          </ul>
+          <div class="footnote">
+            Usa i pulsanti sulla genealogia per vedere come colpa e punizione si trasmettono
+            lungo la stirpe di Edipo.
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Mini glossario rapido</div>
+          </div>
+          <div class="glossary-item">
+            <strong>Oracolo</strong>
+            <p>Luogo sacro in cui si interpella il volere degli dèi (Delfi per Apollo).</p>
+          </div>
+          <div class="glossary-item">
+            <strong>Tragedia</strong>
+            <p>Forma teatrale greca in cui un eroe affronta un destino più grande di lui.</p>
+          </div>
+          <div class="glossary-item">
+            <strong>Incesto</strong>
+            <p>Rapporto proibito tra consanguinei: nel mito è violazione massima delle leggi divine.</p>
+          </div>
+          <div class="glossary-item">
+            <strong>Polis</strong>
+            <p>La città-stato greca, con le sue leggi e istituzioni politiche.</p>
+          </div>
+          <span class="divider-label">Per lo studio</span>
+          <p class="footnote">
+            Prova a riassumere in 3 righe: 1) la storia di Edipo, 2) la storia di Antigone,
+            3) la differenza tra legge morale e legge positiva.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    // Navigazione sezioni
+    const navButtons = document.querySelectorAll('.nav-btn');
+    const scrollArea = document.getElementById('scroll-area');
+
+    navButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        navButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const targetId = btn.getAttribute('data-target');
+        const target = document.getElementById(targetId);
+        if (target) {
+          const offsetTop = target.offsetTop;
+          scrollArea.scrollTo({ top: offsetTop - 8, behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Filtri genealogia
+    const chipButtons = document.querySelectorAll('.chip-btn');
+    const rows = document.querySelectorAll('#gene-table tbody tr');
+
+    function applyFilter(mode) {
+      rows.forEach(row => {
+        row.classList.remove('filtered-out');
+        if (mode === 'tutti') return;
+
+        const hasHybris = !!row.querySelector('.col-hybris')?.textContent.trim();
+        const hasNemesi = !!row.querySelector('.col-nemesi')?.textContent.trim();
+        const hasTrasm = !!row.querySelector('.col-trasm')?.textContent.trim();
+
+        if (mode === 'hybris' && !hasHybris) {
+          row.classList.add('filtered-out');
+        } else if (mode === 'nemesi' && !hasNemesi) {
+          row.classList.add('filtered-out');
+        } else if (mode === 'trasm' && !hasTrasm) {
+          row.classList.add('filtered-out');
+        }
+      });
+    }
+
+    chipButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        chipButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const mode = btn.getAttribute('data-filter');
+        applyFilter(mode);
+      });
+    });
+
+    // Imposta filtro iniziale
+    applyFilter('tutti');
+  </script>
 </body>
 </html>
