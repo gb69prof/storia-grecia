@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timeline Civiltà Micenea</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    /* Stili specifici per la timeline micenea */
+    .page--timeline {
+      max-width: 1100px;
+    }
+
+    .timeline-wrapper {
+      margin-top: 1.5rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.7fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .timeline-wrapper {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .timeline-axis {
+      background: #f1e2c5;
+      border-radius: 14px;
+      padding: 1rem 1.2rem 1.2rem;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+      border: 1px solid rgba(120,96,62,0.5);
+      position: relative;
+    }
+
+    .timeline-axis::before {
+      content: "";
+      position: absolute;
+      left: 12px;
+      top: 2.8rem;
+      bottom: 1.2rem;
+      width: 3px;
+      background: linear-gradient(to bottom, #7b5a33, #c79c63);
+      opacity: 0.9;
+    }
+
+    .timeline-title {
+      margin: 0 0 0.8rem 0;
+      font-size: 1.2rem;
+    }
+
+    .timeline-sub {
+      margin: 0 0 1.1rem 0;
+      font-size: 0.9rem;
+      color: #6b5234;
+    }
+
+    .timeline-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 32px;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #f5f0e4;
+      border: 2px solid #7b5a33;
+      box-shadow: 0 0 0 3px rgba(123,90,51,0.2);
+    }
+
+    .timeline-item-button {
+      width: 100%;
+      border-radius: 999px;
+      border: none;
+      padding: 0.5rem 0.9rem;
+      font-size: 0.9rem;
+      text-align: left;
+      cursor: pointer;
+      background: #e0c9a2;
+      color: #2c2114;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 3px 7px rgba(0,0,0,0.2);
+      transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+    }
+
+    .timeline-item-button span.timeline-year {
+      font-weight: 700;
+      margin-right: 0.4rem;
+    }
+
+    .timeline-item-button span.timeline-label {
+      flex: 1;
+      font-weight: 500;
+    }
+
+    .timeline-item-button span.timeline-arrow {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    .timeline-item-button:hover {
+      background: #d7bc8e;
+    }
+
+    .timeline-item-button:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+
+    .timeline-item-button.is-active {
+      background: #b88542;
+      color: #fdf5e5;
+    }
+
+    .timeline-item-button.is-active .timeline-arrow {
+      opacity: 1;
+    }
+
+    .timeline-details {
+      background: #f7ecda;
+      border-radius: 14px;
+      padding: 1.2rem 1.3rem 1.3rem;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+      border: 1px solid rgba(120,96,62,0.5);
+    }
+
+    .timeline-details-title {
+      margin: 0 0 0.4rem;
+      font-size: 1.15rem;
+    }
+
+    .timeline-details-period {
+      margin: 0 0 0.8rem;
+      font-size: 0.9rem;
+      color: #6e5434;
+    }
+
+    .timeline-details-text {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .timeline-details-text + .timeline-details-text {
+      margin-top: 0.6rem;
+    }
+
+    .breadcrumb {
+      font-size: 0.9rem;
+      color: #745c3b;
+      margin: 0 0 0.6rem;
+    }
+
+    .breadcrumb span {
+      opacity: 0.9;
+    }
+
+    .top-bar__title-link {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .top-bar__title-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header class="top-bar">
+    <div class="top-bar__title"><a href="../index.html" class="top-bar__title-link">Storia della Grecia</a></div>
+    <nav class="top-bar__nav">
+      <button class="nav-btn" aria-label="Cerca">🔍</button>
+      <button class="nav-btn" aria-label="Percorsi tematici">🧭</button>
+      <button class="nav-btn" aria-label="Risorse">📚</button>
+    </nav>
+  </header>
+
+  <main class="page page--timeline">
+    <div class="breadcrumb"><span>Storia della Grecia</span> / <span>Età Micenea</span> / <span>Timeline</span></div>
+
+    <section class="intro">
+      <h1>Timeline della Civiltà Micenea</h1>
+      <p>Questa linea del tempo ripercorre i momenti principali della civiltà micenea. Tocca un intervallo per aprire il riquadro di spiegazione.</p>
+    </section>
+
+    <section class="timeline-wrapper">
+      <div class="timeline-axis" aria-label="Timeline della civiltà micenea">
+        <h2 class="timeline-title">Sequenza degli eventi</h2>
+        <p class="timeline-sub">Dal formarsi delle prime élite micenee al crollo delle cittadelle fortificate.</p>
+
+        <ul class="timeline-list">
+          <li class="timeline-item">
+            <div class="timeline-dot"></div>
+            <button class="timeline-item-button is-active" data-target="tm-1">
+              <span class="timeline-year">c. 1600-1500 a.C.</span>
+              <span class="timeline-label">Formazione dei primi centri micenei</span>
+              <span class="timeline-arrow">▼</span>
+            </button>
+          </li>
+
+          <li class="timeline-item">
+            <div class="timeline-dot"></div>
+            <button class="timeline-item-button" data-target="tm-2">
+              <span class="timeline-year">c. 1500-1400 a.C.</span>
+              <span class="timeline-label">Affermarsi delle grandi cittadelle fortificate</span>
+              <span class="timeline-arrow">▼</span>
+            </button>
+          </li>
+
+          <li class="timeline-item">
+            <div class="timeline-dot"></div>
+            <button class="timeline-item-button" data-target="tm-3">
+              <span class="timeline-year">c. 1400-1250 a.C.</span>
+              <span class="timeline-label">Apogeo miceneo e controllo del Mediterraneo orientale</span>
+              <span class="timeline-arrow">▼</span>
+            </button>
+          </li>
+
+          <li class="timeline-item">
+            <div class="timeline-dot"></div>
+            <button class="timeline-item-button" data-target="tm-4">
+              <span class="timeline-year">c. 1250 a.C.</span>
+              <span class="timeline-label">Tradizionale datazione della guerra di Troia</span>
+              <span class="timeline-arrow">▼</span>
+            </button>
+          </li>
+
+          <li class="timeline-item">
+            <div class="timeline-dot"></div>
+            <button class="timeline-item-button" data-target="tm-5">
+              <span class="timeline-year">c. 1200-1150 a.C.</span>
+              <span class="timeline-label">Crisi delle corti micenee e distruzione delle cittadelle</span>
+              <span class="timeline-arrow">▼</span>
+            </button>
+          </li>
+
+          <li class="timeline-item">
+            <div class="timeline-dot"></div>
+            <button class="timeline-item-button" data-target="tm-6">
+              <span class="timeline-year">dopo il 1100 a.C.</span>
+              <span class="timeline-label">Fine della civiltà micenea e inizio del "Medioevo greco"</span>
+              <span class="timeline-arrow">▼</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <aside class="timeline-details" aria-live="polite">
+        <h2 class="timeline-details-title" id="tm-title">Formazione dei primi centri micenei</h2>
+        <p class="timeline-details-period" id="tm-period">c. 1600-1500 a.C.</p>
+        <p class="timeline-details-text" id="tm-text-1">
+          Nei secoli tra il 1600 e il 1500 a.C. nelle regioni della Grecia continentale (in particolare nel Peloponneso) si sviluppano le prime élite guerriere micenee. Le tombe a fossa e i ricchi corredi testimoniano la nascita di una classe dominante che concentra ricchezza, armi e prestigio.
+        </p>
+        <p class="timeline-details-text" id="tm-text-2">
+          In questa fase i centri micenei non sono ancora le grandi roccaforti che conosciamo più tardi, ma il loro potere cresce grazie ai contatti con Creta e con le rotte del Mediterraneo orientale.
+        </p>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    // Dati testuali della timeline micenea
+    const MICENEA_TIMELINE_DATA = {
+      "tm-1": {
+        title: "Formazione dei primi centri micenei",
+        period: "c. 1600-1500 a.C.",
+        text1: "Nei secoli tra il 1600 e il 1500 a.C. nelle regioni della Grecia continentale (in particolare nel Peloponneso) si sviluppano le prime élite guerriere micenee. Le tombe a fossa e i ricchi corredi testimoniano la nascita di una classe dominante che concentra ricchezza, armi e prestigio.",
+        text2: "In questa fase i centri micenei non sono ancora le grandi roccaforti che conosciamo più tardi, ma il loro potere cresce grazie ai contatti con Creta e con le rotte del Mediterraneo orientale."
+      },
+      "tm-2": {
+        title: "Affermarsi delle grandi cittadelle fortificate",
+        period: "c. 1500-1400 a.C.",
+        text1: "Tra il 1500 e il 1400 a.C. si consolidano le grandi cittadelle micenee, come Micene, Tirinto e Pilo. Sono fortificate da mura poderose, adatte a difendere una classe dirigente guerriera.",
+        text2: "All'interno delle cittadelle si organizza un potere di tipo palaziale: il wanax (re) guida una burocrazia che controlla produzione, redistribuzione e rapporti con l'esterno."
+      },
+      "tm-3": {
+        title: "Apogeo miceneo e controllo del Mediterraneo orientale",
+        period: "c. 1400-1250 a.C.",
+        text1: "In questo periodo la civiltà micenea raggiunge il suo massimo splendore. I Micenei sostituiscono progressivamente i Minoici nel controllo delle rotte del Mediterraneo orientale e sono presenti in molti porti del Vicino Oriente.",
+        text2: "La scrittura lineare B documenta una gestione capillare delle risorse: grano, olio, metalli, tessuti. Le corti micenee diventano centri politici, economici e religiosi di grande rilievo." 
+      },
+      "tm-4": {
+        title: "Tradizionale datazione della guerra di Troia",
+        period: "c. 1250 a.C.",
+        text1: "Intorno al 1250 a.C. le fonti antiche collocano la guerra di Troia, divenuta simbolo della potenza guerriera micenea. Non sappiamo quanto il racconto omerico corrisponda ai fatti storici, ma gli scavi archeologici mostrano effettivamente distruzioni in vari centri dell'Anatolia e dell'Egeo.",
+        text2: "Nella didattica, questa data funziona come punto di riferimento per collegare la tradizione epica (Iliade, Odissea) alla storia della Grecia micenea." 
+      },
+      "tm-5": {
+        title: "Crisi delle corti micenee e distruzione delle cittadelle",
+        period: "c. 1200-1150 a.C.",
+        text1: "Tra il 1200 e il 1150 a.C. molte cittadelle micenee vengono distrutte o abbandonate. Le cause sono probabilmente molteplici: crisi economica, conflitti interni, movimenti di popolazioni, cambiamenti nelle rotte commerciali.",
+        text2: "Le tavolette in lineare B testimoniano una fase di tensione: scorte di armi, registrazioni di terre e persone. Poi, all'improvviso, la documentazione si interrompe: la burocrazia palaziale crolla insieme ai palazzi." 
+      },
+      "tm-6": {
+        title: "Fine della civiltà micenea e inizio del \"Medioevo greco\"",
+        period: "dopo il 1100 a.C.",
+        text1: "Dopo il 1100 a.C. il mondo miceneo non esiste più come sistema politico palaziale. Le grandi cittadelle sono in rovina e le reti commerciali di lunga distanza si riducono.",
+        text2: "Per alcuni secoli le fonti sono scarse: è il cosiddetto \"Medioevo greco\", una fase in cui sopravvivono solo frammenti dell'eredità micenea, che riaffioreranno nei poemi omerici e nelle tradizioni delle polis dell'età arcaica." 
+      }
+    };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const buttons = Array.from(document.querySelectorAll(".timeline-item-button"));
+      const titleEl = document.getElementById("tm-title");
+      const periodEl = document.getElementById("tm-period");
+      const text1El = document.getElementById("tm-text-1");
+      const text2El = document.getElementById("tm-text-2");
+
+      function setActive(id) {
+        const data = MICENEA_TIMELINE_DATA[id];
+        if (!data) return;
+
+        buttons.forEach(btn => {
+          if (btn.dataset.target === id) {
+            btn.classList.add("is-active");
+          } else {
+            btn.classList.remove("is-active");
+          }
+        });
+
+        titleEl.textContent = data.title;
+        periodEl.textContent = data.period;
+        text1El.textContent = data.text1;
+        text2El.textContent = data.text2;
+      }
+
+      buttons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const id = btn.dataset.target;
+          setActive(id);
+        });
+      });
+    });
+  </script>
+</body>
+</html>
