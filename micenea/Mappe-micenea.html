@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Micene – Percorso guidato nel sito archeologico</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bg: #0b1620;
+      --bg-light: #101d2a;
+      --accent: #e1a74a;
+      --text: #f5f5f5;
+      --muted: #c7d0da;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at top,#1b3246 0,#050a10 55%,#020407 100%);color:var(--text);line-height:1.6;padding:1.5rem}
+    .page{max-width:1100px;margin:0 auto;background:linear-gradient(145deg,#111a24,#06090f);border-radius:18px;box-shadow:0 18px 40px rgba(0,0,0,0.65);padding:2.5rem 2rem 3rem;border:1px solid rgba(255,255,255,0.04)}
+    header{text-align:center;margin-bottom:2.5rem}
+    header h1{font-size:clamp(1.9rem,2.3vw + 1.2rem,2.6rem);margin-bottom:.4rem;letter-spacing:.04em}
+    header p.subtitle{color:var(--muted);font-size:.95rem}
+    .hero-image{margin:2rem 0 1.5rem;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,0.08)}
+    .hero-image img{width:100%;display:block;object-fit:cover}
+    nav{margin:1.5rem 0 2.2rem;background:rgba(6,19,32,0.85);border-radius:14px;padding:1rem 1.25rem;border:1px solid rgba(255,255,255,0.06)}
+    nav h2{font-size:1rem;margin-bottom:.4rem;color:var(--accent)}
+    nav ul{list-style:none;display:flex;flex-wrap:wrap;gap:.75rem 1.5rem;font-size:.94rem}
+    nav a{color:var(--muted);text-decoration:none;position:relative;padding-bottom:1px}
+    nav a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--accent);transition:width .2s ease-out}
+    nav a:hover::after{width:100%}
+    .intro{margin-bottom:2.2rem;font-size:.98rem;color:var(--muted)}
+    .section{margin-bottom:2.4rem;padding:1.6rem 1.4rem;border-radius:16px;background:radial-gradient(circle at top left,rgba(225,167,74,0.08),transparent 55%);border:1px solid rgba(255,255,255,0.05);display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2.6fr);gap:1.5rem;align-items:flex-start}
+    .section:nth-of-type(2n){background:radial-gradient(circle at top right,rgba(103,157,214,0.16),transparent 55%)}
+    .section-text h2{font-size:1.25rem;margin-bottom:.7rem;color:var(--accent)}
+    .section-text p + p{margin-top:.9rem}
+    .section-media img{width:100%;border-radius:14px;display:block;object-fit:cover;border:1px solid rgba(255,255,255,0.12);cursor:pointer;transition:transform .2s ease-out,box-shadow .2s ease-out}
+    .section-media img:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(0,0,0,0.6)}
+    .section-media figcaption{font-size:.8rem;color:var(--muted);margin-top:.4rem;text-align:center}
+    .conclusion{margin-top:2.4rem;padding-top:1.4rem;border-top:1px solid rgba(255,255,255,0.05)}
+    .conclusion h2{font-size:1.18rem;margin-bottom:.7rem;color:var(--accent)}
+    .conclusion p + p{margin-top:.9rem}
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.9);display:none;justify-content:center;align-items:center;z-index:999;padding:1rem}
+    .lightbox img{max-width:100%;max-height:100%;border-radius:10px;box-shadow:0 18px 40px rgba(0,0,0,0.9)}
+    .lightbox.active{display:flex}
+    .lightbox-close{position:fixed;top:1.3rem;right:1.6rem;font-size:1.7rem;color:#fff;cursor:pointer;user-select:none}
+    @media (max-width:800px){body{padding:.8rem}.page{padding:1.6rem 1.2rem 2.2rem}.section{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>Micene – Percorso guidato nel sito archeologico</h1>
+      <p class="subtitle">Rocca, Porta dei Leoni, maschere funerarie e tombe a thòlos della civiltà micenea</p>
+    </header>
+
+    <div class="hero-image">
+      <img src="img/micene_rocca_aerea.jpg" alt="Vista aerea del sito archeologico di Micene">
+    </div>
+
+    <nav>
+      <h2>Percorso</h2>
+      <ul>
+        <li><a href="#rocca">1. La rocca di Micene</a></li>
+        <li><a href="#porta">2. La Porta dei Leoni</a></li>
+        <li><a href="#maschera">3. La “Maschera di Agamennone”</a></li>
+        <li><a href="#tomba">4. La “Tomba di Agamennone”</a></li>
+        <li><a href="#significato">Significato storico e culturale</a></li>
+      </ul>
+    </nav>
+
+    <section class="intro">
+      <p>
+        Questo contributo propone un itinerario strutturato all’interno del sito archeologico di Micene,
+        cuore della civiltà micenea e uno dei complessi monumentali più significativi dell’Età del Bronzo egea.
+        L’obiettivo è presentare gli elementi principali ancora oggi visibili, mettendo in relazione dati storici,
+        funzione originaria degli edifici e valore simbolico.
+      </p>
+      <p>
+        Il percorso si articola in quattro tappe fondamentali.
+      </p>
+    </section>
+
+    <section class="section" id="rocca">
+      <div class="section-text">
+        <h2>1. La Rocca di Micene</h2>
+        <p>
+          Micene sorge su una collina strategica nell’Argolide, naturalmente difesa e in posizione dominante
+          sulla pianura circostante. La rocca era protetta da <strong>mura ciclopiche</strong>, costituite da enormi blocchi
+          di pietra disposti a secco: la loro imponenza aveva anche una funzione simbolica, poiché comunicava solidità,
+          potere e prestigio.
+        </p>
+        <p>
+          All’interno si sviluppava un articolato complesso palaziale, centro politico, amministrativo ed economico
+          del regno. Cuore del palazzo era il <strong>megaron</strong>, grande sala rettangolare con focolare centrale e trono
+          laterale, dove il sovrano riceveva ospiti, ambasciatori e funzionari. Magazzini, archivi, santuari e spazi
+          di servizio completavano l’organizzazione degli ambienti.
+        </p>
+      </div>
+      <figure class="section-media">
+        <img src="img/micene_rocca_aerea.jpg" alt="La rocca di Micene vista dall'alto" data-full="img/micene_rocca_aerea.jpg">
+        <figcaption>La rocca di Micene: le strutture del palazzo e le mura ciclopiche sulla collina.</figcaption>
+      </figure>
+    </section>
+
+    <section class="section" id="porta">
+      <div class="section-text">
+        <h2>2. La Porta dei Leoni</h2>
+        <p>
+          L’accesso monumentale alla cittadella avveniva attraverso la celebre <strong>Porta dei Leoni</strong>,
+          realizzata intorno al 1250 a.C. Sopra l’architrave, un grande triangolo di alleggerimento ospita il rilievo
+          di due leoni affrontati, disposti ai lati di una colonna.
+        </p>
+        <p>
+          La scultura, uno dei rarissimi esempi di arte monumentale micenea giunti fino a noi, aveva una funzione
+          fortemente simbolica: i leoni alludevano al potere regale e alla dimensione sacrale del palazzo.
+          Attraversare questa soglia significava entrare in uno spazio politico e cerimoniale di altissimo rango.
+        </p>
+      </div>
+      <figure class="section-media">
+        <img src="img/micene_porta_dei_leoni.jpg" alt="La Porta dei Leoni a Micene" data-full="img/micene_porta_dei_leoni.jpg">
+        <figcaption>La Porta dei Leoni, ingresso monumentale alla cittadella micenea.</figcaption>
+      </figure>
+    </section>
+
+    <section class="section" id="maschera">
+      <div class="section-text">
+        <h2>3. La cosiddetta “Maschera di Agamennone”</h2>
+        <p>
+          Durante gli scavi ottocenteschi condotti da Heinrich Schliemann furono rinvenute, all’interno di tombe reali,
+          preziose <strong>maschere funerarie in oro</strong>. La più celebre è la cosiddetta “Maschera di Agamennone”,
+          così denominata in riferimento al leggendario re acheo della guerra di Troia.
+        </p>
+        <p>
+          Gli studi moderni dimostrano che la maschera è anteriore all’epoca in cui la tradizione colloca Agamennone;
+          tuttavia il nome è rimasto, per consuetudine. L’oggetto testimonia l’elevato livello artistico e la ricchezza
+          delle élite micenee, oltre a rivelare usanze funerarie complesse e cerimoniali.
+        </p>
+      </div>
+      <figure class="section-media">
+        <img src="img/micene_maschera_agamennone.jpg" alt="Maschera funeraria d'oro detta di Agamennone" data-full="img/micene_maschera_agamennone.jpg">
+        <figcaption>La celebre maschera funeraria d’oro detta “di Agamennone”.</figcaption>
+      </figure>
+    </section>
+
+    <section class="section" id="tomba">
+      <div class="section-text">
+        <h2>4. La cosiddetta “Tomba di Agamennone” (Tesoro di Atreo)</h2>
+        <p>
+          Al di fuori della cittadella si trovano le monumentali <strong>tombe a thòlos</strong>, grandi camere funerarie
+          a pianta circolare coperte da una volta ogivale costruita con la tecnica della falsa cupola.
+          Tra queste, la più imponente è il cosiddetto <strong>Tesoro di Atreo</strong>, tradizionalmente identificato come
+          “Tomba di Agamennone”.
+        </p>
+        <p>
+          Si accede all’interno attraverso un lungo corridoio in pietra (dromos) che conduce a uno spazio interno di grande
+          perfezione geometrica, probabilmente destinato a membri di rango elevatissimo della dinastia regnante.
+          Anche in questo caso il nome tradizionale ha carattere simbolico e non documentario.
+        </p>
+      </div>
+      <figure class="section-media">
+        <img src="img/micene_tesoro_atreo.jpg" alt="Ingresso del Tesoro di Atreo, la cosiddetta Tomba di Agamennone" data-full="img/micene_tesoro_atreo.jpg">
+        <figcaption>Il dromos e l’ingresso del cosiddetto Tesoro di Atreo.</figcaption>
+      </figure>
+    </section>
+
+    <section class="conclusion" id="significato">
+      <h2>Significato storico e culturale del sito</h2>
+      <p>
+        Micene rappresenta un nodo essenziale per la comprensione della civiltà micenea, caratterizzata da una struttura
+        politica fortemente centralizzata, da un’economia articolata e da una cultura guerriera e aristocratica.
+        Qui mito e archeologia si intrecciano: le narrazioni omeriche trovano una suggestiva cornice nei resti materiali,
+        pur senza potersi identificare meccanicamente con essi.
+      </p>
+      <p>
+        Questo percorso intende offrire una visione coerente e organica del sito, preparando alla visita reale o virtuale
+        e favorendo una comprensione consapevole della relazione tra paesaggio, architettura e memoria storica.
+      </p>
+    </section>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <img src="" alt="" id="lightboxImg">
+  </div>
+
+  <script>
+    const lightbox=document.getElementById('lightbox');
+    const lightboxImg=document.getElementById('lightboxImg');
+    const lightboxClose=document.getElementById('lightboxClose');
+
+    document.querySelectorAll('.section-media img').forEach(img=>{
+      img.addEventListener('click',()=>{
+        const src=img.getAttribute('data-full')||img.src;
+        lightboxImg.src=src;
+        lightbox.classList.add('active');
+      });
+    });
+
+    lightbox.addEventListener('click',()=>{
+      lightbox.classList.remove('active');
+      lightboxImg.src="";
+    });
+
+    lightboxClose.addEventListener('click',e=>{
+      e.stopPropagation();
+      lightbox.classList.remove('active');
+      lightboxImg.src="";
+    });
+  </script>
+</body>
+</html>
