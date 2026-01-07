@@ -2,24 +2,26 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
-  <title>Timeline Grecia Classica</title>
+  <title>Timeline della Grecia Classica</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     :root {
-      --bg: #07163d;
-      --bg-panel: #0f225f;
-      --accent: #ffd23f;
-      --accent-soft: rgba(255, 210, 63, 0.25);
-      --text: #ffffff;
-      --muted: #d2ddff;
-      --border-soft: rgba(255, 255, 255, 0.14);
-      --timeline-line: rgba(255, 255, 255, 0.35);
-      --shadow-soft: 0 22px 55px rgba(0, 0, 0, 0.65);
-      --radius-xl: 24px;
-      --radius-lg: 18px;
+      --bg-page: #f4e3c7;
+      --bg-header: #4f3827;
+      --bg-card: #fdf5e7;
+      --bg-card-soft: #f7ebd6;
+      --accent: #c9792b;
+      --accent-soft: #f0c08a;
+      --accent-strong: #a25917;
+      --text-main: #3c2a1c;
+      --text-soft: #6b5845;
+      --border-soft: #e4cdaa;
+      --shadow-soft: 0 14px 32px rgba(57, 35, 16, 0.25);
+      --radius-lg: 22px;
+      --radius-md: 16px;
       --radius-pill: 999px;
-      --transition-fast: 0.18s ease-out;
-      --transition-med: 0.24s ease-out;
+      --transition-fast: 0.16s ease-out;
+      --transition-med: 0.22s ease-out;
     }
 
     * {
@@ -30,515 +32,388 @@
 
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
-      background: radial-gradient(circle at top left, #15213b 0, #050816 45%, #02030a 100%);
-      color: var(--text);
-      min-height: 100vh;
+      background: var(--bg-page);
+      color: var(--text-main);
+      line-height: 1.5;
+    }
+
+    .top-bar {
+      background: var(--bg-header);
+      color: #fcebd2;
+      padding: 10px 18px;
+      font-size: 0.86rem;
+      box-shadow: 0 4px 11px rgba(0, 0, 0, 0.25);
+    }
+
+    .top-bar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
       display: flex;
-      justify-content: center;
-      align-items: stretch;
-      padding: 24px;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .top-bar-title {
+      font-weight: 600;
     }
 
     .page {
-      max-width: 1240px;
-      width: 100%;
-      background: linear-gradient(135deg, rgba(11, 16, 32, 0.98), rgba(4, 7, 18, 0.98));
-      border-radius: 28px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow: var(--shadow-soft);
-      padding: 24px 26px 22px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
+      max-width: 1200px;
+      margin: 18px auto 32px;
+      padding: 0 16px 16px;
     }
 
-    header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 10px 18px;
-      padding: 4px 2px 4px;
-      border-bottom: 1px solid var(--border-soft);
-    }
-
-    .title-block {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    h1 {
-      font-size: 1.5rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .pill {
-      font-size: 0.7rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      color: var(--muted);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .pill-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #ffe38a 0, #ffcc4d 45%, #ff9f1c 100%);
-      box-shadow: 0 0 0 4px rgba(255, 204, 77, 0.15);
-    }
-
-    .subtitle {
-      font-size: 0.86rem;
-      color: var(--muted);
-      max-width: 600px;
-      line-height: 1.4;
-    }
-
-    .legend {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
+    .breadcrumbs {
       font-size: 0.78rem;
-      color: var(--muted);
-      align-items: center;
+      color: var(--text-soft);
+      margin-bottom: 10px;
     }
 
-    .legend span {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.04), transparent 60%);
+    .breadcrumbs span + span::before {
+      content: " › ";
+      color: #b39670;
     }
 
-    .legend-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 999px;
-      background: var(--accent);
+    header.page-header {
+      margin-bottom: 18px;
     }
 
-    .legend-dot--war { background: #ff6b6b; }
-    .legend-dot--polis { background: #4dd0e1; }
-    .legend-dot--culture { background: #a5d6a7; }
+    header.page-header h1 {
+      font-size: 1.6rem;
+      margin-bottom: 4px;
+      color: #3a2515;
+    }
 
-    main {
+    header.page-header p {
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      max-width: 720px;
+    }
+
+    main.layout {
       display: grid;
-      grid-template-columns: minmax(0, 36%) minmax(0, 64%);
+      grid-template-columns: minmax(0, 40%) minmax(0, 60%);
       gap: 16px;
-      height: min(70vh, 640px);
+      align-items: flex-start;
     }
 
-    .timeline-panel,
-    .detail-panel {
-      border-radius: var(--radius-xl);
-      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.04), transparent 55%),
-                  linear-gradient(145deg, rgba(8, 11, 24, 0.94), rgba(4, 6, 16, 0.98));
+    .panel {
+      background: linear-gradient(135deg, var(--bg-card), #f9e9d1);
+      border-radius: var(--radius-lg);
       border: 1px solid var(--border-soft);
-      padding: 16px 14px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      overflow: hidden;
-      position: relative;
+      box-shadow: var(--shadow-soft);
+      padding: 16px 16px 14px;
     }
 
     .panel-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 0 4px 2px;
+      margin-bottom: 10px;
     }
 
     .panel-header h2 {
-      font-size: 0.9rem;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--muted);
+      font-size: 1.02rem;
+      margin-bottom: 4px;
+      color: #3a2618;
     }
 
-    .panel-header small {
-      font-size: 0.7rem;
-      color: var(--muted);
-      opacity: 0.8;
+    .panel-header p {
+      font-size: 0.82rem;
+      color: var(--text-soft);
     }
 
-    .timeline-wrapper {
-      position: relative;
-      flex: 1;
-      margin-top: 4px;
-      padding: 4px 0 4px 4px;
-    }
-
-    .timeline-scroll {
-      height: 100%;
-      overflow-y: auto;
-      padding-right: 6px;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
-    }
-
-    .timeline-scroll::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    .timeline-scroll::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    .timeline-scroll::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.22);
-      border-radius: 999px;
-    }
-
-    .timeline-line {
-      position: absolute;
-      left: 24px;
-      top: 10px;
-      bottom: 10px;
-      width: 2px;
-      background: linear-gradient(to bottom, transparent 0, var(--timeline-line) 12%, var(--timeline-line) 88%, transparent 100%);
-    }
-
-    .timeline-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 10px 10px 10px 6px;
-      border-radius: 16px;
-      cursor: pointer;
-      position: relative;
-      transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
-      border: 1px solid transparent;
-    }
-
-    .timeline-item::before {
-      content: "";
-      position: relative;
-      margin-top: 2px;
-      flex: 0 0 14px;
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, 0.4);
-      background: radial-gradient(circle at 30% 30%, #ffe38a 0, #ffcc4d 45%, #ff9f1c 100%);
-      box-shadow: 0 0 0 4px rgba(255, 204, 77, 0.2);
-      z-index: 2;
-    }
-
-    .timeline-item-inner {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .timeline-year {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--accent);
-    }
-
-    .timeline-title {
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-
-    .timeline-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-      margin-top: 2px;
-    }
-
-    .tag {
-      font-size: 0.7rem;
-      padding: 2px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      color: var(--muted);
-      background: rgba(255, 255, 255, 0.02);
-    }
-
-    .tag-war { border-color: rgba(255, 107, 107, 0.6); }
-    .tag-polis { border-color: rgba(77, 208, 225, 0.7); }
-    .tag-culture { border-color: rgba(165, 214, 167, 0.7); }
-
-    .timeline-item:hover {
-      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.06), transparent 70%);
-      transform: translateX(2px);
-      border-color: rgba(255, 255, 255, 0.12);
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35);
-    }
-
-    .timeline-item.active {
-      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.10), rgba(255, 204, 77, 0.08));
-      border-color: rgba(255, 204, 77, 0.9);
-      box-shadow: 0 16px 38px rgba(0, 0, 0, 0.5);
-    }
-
-    .timeline-item.active::before {
-      box-shadow: 0 0 0 5px rgba(255, 204, 77, 0.28);
-    }
-
-    .detail-body {
-      flex: 1;
-      padding: 2px 4px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      overflow: hidden;
-    }
-
-    .detail-scroll {
-      flex: 1;
+    .events-scroll {
+      max-height: 70vh;
       overflow-y: auto;
       padding-right: 4px;
+      margin-right: -4px;
       scrollbar-width: thin;
-      scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
+      scrollbar-color: #d3b68b transparent;
     }
 
-    .detail-scroll::-webkit-scrollbar {
+    .events-scroll::-webkit-scrollbar {
       width: 6px;
     }
 
-    .detail-scroll::-webkit-scrollbar-track {
+    .events-scroll::-webkit-scrollbar-track {
       background: transparent;
     }
 
-    .detail-scroll::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.22);
+    .events-scroll::-webkit-scrollbar-thumb {
+      background: #d3b68b;
       border-radius: 999px;
+    }
+
+    .event-button {
+      width: 100%;
+      text-align: left;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      margin-bottom: 8px;
+    }
+
+    .event-button-inner {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-card-soft);
+      border: 1px solid rgba(181, 141, 93, 0.6);
+      box-shadow: 0 4px 8px rgba(110, 78, 46, 0.15);
+      transition: background var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .event-button-inner:hover {
+      background: #f8dfbe;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(110, 78, 46, 0.22);
+    }
+
+    .event-button.active .event-button-inner {
+      background: linear-gradient(135deg, var(--accent-soft), #ffe1b6);
+      border-color: var(--accent-strong);
+      box-shadow: 0 7px 16px rgba(123, 73, 22, 0.4);
+    }
+
+    .event-radio {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid #b3895a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fdf5e7;
+    }
+
+    .event-button.active .event-radio {
+      border-color: var(--accent-strong);
+      background: #fdf2d9;
+    }
+
+    .event-radio-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #d09a4f;
+    }
+
+    .event-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .event-year {
+      font-size: 0.78rem;
+      color: #7a6246;
+    }
+
+    .event-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #3a2515;
+    }
+
+    .event-tags {
+      display: flex;
+      gap: 6px;
+      margin-top: 2px;
+      flex-wrap: wrap;
+      font-size: 0.7rem;
+    }
+
+    .event-tag {
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(179, 132, 83, 0.5);
+      color: #7a5a36;
+    }
+
+    .event-tag--war { background: #ffe0dd; border-color: #c96f63; }
+    .event-tag--polis { background: #e4f2ff; border-color: #4b8bb7; }
+    .event-tag--culture { background: #e6f6dd; border-color: #679b4c; }
+
+    .event-arrow {
+      font-size: 1.1rem;
+      color: #b3895a;
+    }
+
+    .event-button.active .event-arrow {
+      color: var(--accent-strong);
+    }
+
+    .detail-header {
+      margin-bottom: 8px;
     }
 
     .detail-era {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--accent);
-      margin-bottom: 4px;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      margin-bottom: 2px;
     }
 
     .detail-title {
       font-size: 1.1rem;
-      line-height: 1.2;
-      margin-bottom: 6px;
+      font-weight: 600;
+      color: #3a2618;
     }
 
-    .detail-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      font-size: 0.76rem;
-      color: var(--muted);
-      margin-bottom: 6px;
+    .detail-year-line {
+      font-size: 0.86rem;
+      color: #85684d;
+      margin-top: 2px;
     }
 
-    .detail-meta span {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      background: rgba(0, 0, 0, 0.18);
+    .detail-body {
+      max-height: 70vh;
+      overflow-y: auto;
+      padding-right: 4px;
+      margin-right: -4px;
+      scrollbar-width: thin;
+      scrollbar-color: #d3b68b transparent;
     }
 
-    .bullet-list {
-      list-style: none;
-      display: grid;
-      gap: 6px;
-      font-size: 0.9rem;
-      color: var(--muted);
-      margin: 6px 0;
-    }
-
-    .bullet-list li {
-      position: relative;
-      padding-left: 16px;
-      line-height: 1.45;
-    }
-
-    .bullet-list li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0.55em;
+    .detail-body::-webkit-scrollbar {
       width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.65);
     }
 
-    .detail-block-title {
-      font-size: 0.8rem;
-      letter-spacing: 0.16em;
+    .detail-body::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .detail-body::-webkit-scrollbar-thumb {
+      background: #d3b68b;
+      border-radius: 999px;
+    }
+
+    .detail-section-title {
+      font-size: 0.82rem;
       text-transform: uppercase;
-      color: var(--muted);
-      margin-top: 6px;
+      letter-spacing: 0.11em;
+      color: #8a6d4f;
+      margin-top: 10px;
       margin-bottom: 4px;
     }
 
-    .detail-grid {
+    .detail-list {
+      list-style: none;
+      margin: 0 0 4px;
+      padding: 0;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+    }
+
+    .detail-list li {
+      position: relative;
+      padding-left: 16px;
+      margin-bottom: 4px;
+    }
+
+    .detail-list li::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 0.65em;
+      width: 5px;
+      height: 5px;
+      border-radius: 999px;
+      background: #c48a49;
+    }
+
+    .detail-focus-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 10px;
+      gap: 8px;
       margin-top: 4px;
     }
 
-    .detail-chip {
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
+    .detail-focus-item {
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: var(--radius-md);
       padding: 8px 10px;
-      font-size: 0.82rem;
-      color: var(--muted);
-      background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.4));
-      line-height: 1.35;
+      border: 1px solid rgba(186, 144, 96, 0.5);
+      font-size: 0.84rem;
+      color: var(--text-soft);
     }
 
-    .detail-quote {
-      margin-top: 8px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px dashed rgba(255, 255, 255, 0.22);
-      background: rgba(0, 0, 0, 0.35);
-      font-size: 0.82rem;
-      color: var(--muted);
-      font-style: italic;
-    }
-
-    .detail-footer {
-      margin-top: 8px;
+    .detail-note {
       font-size: 0.78rem;
-      color: var(--muted);
-      opacity: 0.8;
+      color: #8c7153;
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed #ddc19b;
     }
 
     @media (max-width: 900px) {
-      body {
-        padding: 16px;
-      }
-
-      .page {
-        padding: 18px 14px;
-        border-radius: 22px;
-      }
-
-      header {
-        gap: 8px 12px;
-      }
-
-      h1 {
-        font-size: 1.28rem;
-      }
-
-      main {
+      main.layout {
         grid-template-columns: 1fr;
-        height: auto;
-        max-height: none;
       }
 
-      .timeline-panel,
-      .detail-panel {
-        height: auto;
-        max-height: 380px;
+      .events-scroll,
+      .detail-body {
+        max-height: 55vh;
       }
     }
 
     @media (max-width: 600px) {
-      body {
-        padding: 10px;
-      }
-
       .page {
-        padding: 14px 10px 12px;
-        border-radius: 18px;
+        padding: 0 10px 12px;
       }
 
-      main {
-        gap: 10px;
+      header.page-header h1 {
+        font-size: 1.3rem;
       }
 
-      .timeline-panel,
-      .detail-panel {
+      .panel {
         border-radius: 16px;
-      }
-
-      .timeline-item {
-        padding: 9px 8px 8px 4px;
-      }
-
-      .timeline-line {
-        left: 22px;
       }
     }
   </style>
 </head>
 <body>
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="top-bar-title">Storia della Grecia</div>
+    </div>
+  </div>
+
   <div class="page">
-    <header>
-      <div class="title-block">
-        <div class="pill">
-          <span class="pill-dot"></span>
-          <span>Modulo di Storia</span>
-        </div>
-        <h1>
-          Grecia classica
-        </h1>
-        <p class="subtitle">
-          Sequenza essenziale degli eventi che segnano la storia della Grecia classica (fine VI - IV sec. a.C.).
-          Clicca su un evento nella timeline a sinistra per vedere la spiegazione sintetica a destra.
-        </p>
-      </div>
-      <div class="legend">
-        <span><span class="legend-dot legend-dot--polis"></span> Istituzioni e poleis</span>
-        <span><span class="legend-dot legend-dot--war"></span> Guerre e conflitti</span>
-        <span><span class="legend-dot legend-dot--culture"></span> Cultura e pensiero</span>
-      </div>
+    <nav class="breadcrumbs" aria-label="Percorso">
+      <span>Storia della Grecia</span>
+      <span>Età Classica</span>
+      <span>Timeline</span>
+    </nav>
+
+    <header class="page-header">
+      <h1>Timeline della Grecia Classica</h1>
+      <p>
+        Questa linea del tempo ripercorre i momenti principali della Grecia classica: dalla nascita della democrazia ateniese
+        alla fine dell'indipendenza delle poleis. Tocca un evento nella colonna di sinistra per aprire il riquadro di spiegazione.
+      </p>
     </header>
 
-    <main>
-      <section class="timeline-panel" aria-label="Timeline Grecia classica">
+    <main class="layout">
+      <section class="panel" aria-label="Sequenza degli eventi">
         <div class="panel-header">
-          <h2>Timeline degli eventi</h2>
-          <small>clicca per esplorare</small>
+          <h2>Sequenza degli eventi</h2>
+          <p>Dal consolidarsi della polis attica alla transizione verso l'età ellenistica.</p>
         </div>
-        <div class="timeline-wrapper">
-          <div class="timeline-line" aria-hidden="true"></div>
-          <div class="timeline-scroll" id="timeline-list">
-            <!-- Gli eventi vengono inseriti via JavaScript -->
-          </div>
+        <div class="events-scroll" id="events-list">
+          <!-- Eventi creati via JavaScript -->
         </div>
       </section>
 
-      <section class="detail-panel" aria-label="Dettaglio evento selezionato">
-        <div class="panel-header">
-          <h2>Spiegazione dell'evento</h2>
-          <small id="detail-year-label">seleziona un evento nella timeline</small>
+      <section class="panel" aria-label="Spiegazione dell'evento selezionato">
+        <div class="detail-header" id="detail-header">
+          <div class="detail-era">Seleziona un evento nella timeline</div>
+          <div class="detail-title">&nbsp;</div>
+          <div class="detail-year-line" id="detail-year-line"></div>
         </div>
-        <div class="detail-body">
-          <div class="detail-scroll" id="detail-content">
-            <!-- Dettagli dell'evento selezionato -->
-          </div>
-          <div class="detail-footer">
-            Suggerimento: prova a seguire la sequenza completa dalla nascita della democrazia ateniese
-            alla morte di Alessandro per avere il quadro d'insieme della Grecia classica.
-          </div>
+        <div class="detail-body" id="detail-body">
+          <!-- Contenuto riempito via JavaScript -->
         </div>
       </section>
     </main>
@@ -552,24 +427,19 @@
         title: "Riforme di Clistene ad Atene",
         tags: ["polis"],
         era: "Origini della Grecia classica",
-        meta: {
-          luogo: "Atene",
-          categoria: "Istituzioni e poleis",
-          paroleChiave: "democrazia, tribù, isonomia"
-        },
         sintesi: [
-          "Clistene riorganizza la cittadinanza ateniese in nuove tribù miste e introduce un sistema che limita il potere delle grandi famiglie aristocratiche.",
-          "Nasce così una forma più ampia di partecipazione politica, considerata l'avvio della democrazia ateniese classica.",
-          "L'obiettivo è ridurre i conflitti interni e rafforzare l'unità della polis."
+          "Clistene riorganizza la cittadinanza ateniese in nuove tribù miste, spezzando il potere delle grandi famiglie aristocratiche.",
+          "Nasce una forma più ampia di partecipazione politica, considerata l'avvio della democrazia ateniese classica.",
+          "L'obiettivo è ridurre i conflitti interni e rafforzare l'unità della polis." 
         ],
         conseguenze: [
-          "La cittadinanza diventa meno legata all'origine familiare e più al territorio.",
-          "Si stabilisce il principio di isonomia: uguaglianza di fronte alla legge per i cittadini maschi liberi.",
-          "Si crea il quadro istituzionale che permetterà ad Atene di affrontare unita le guerre persiane."
+          "La cittadinanza è meno legata all'origine familiare e più al territorio.",
+          "Si afferma il principio di isonomia: uguaglianza davanti alla legge per i cittadini maschi liberi.",
+          "Si crea il quadro istituzionale che permetterà ad Atene di affrontare unita le guerre persiane." 
         ],
         focus: [
-          "L'innovazione di Clistene non è solo politica ma sociale: mischiando la popolazione, indebolisce le antiche clientele.",
-          "La democrazia ateniese nasce da un conflitto fra fazioni, non da un progetto ideale astratto."
+          "La democrazia ateniese nasce da uno scontro fra fazioni, non da un progetto astratto.",
+          "Le riforme di Clistene sono un esperimento concreto per risolvere una crisi politica." 
         ]
       },
       {
@@ -578,23 +448,19 @@
         title: "Battaglia di Maratona",
         tags: ["war"],
         era: "Prime guerre persiane",
-        meta: {
-          luogo: "Pianura di Maratona",
-          categoria: "Guerre e conflitti",
-          paroleChiave: "Dariо I, opliti, falange"
-        },
         sintesi: [
-          "L'esercito ateniese, affiancato da poche truppe di Platea, sconfigge il corpo di spedizione persiano inviato da Dario I.",
-          "La vittoria dimostra l'efficacia della falange di opliti e il valore militare di cittadini-soldati.",
-          "Per la prima volta, una polis greca respinge un grande impero orientale."
+          "L'esercito ateniese, con poche truppe di Platea, sconfigge il corpo di spedizione persiano inviato da Dario I.",
+          "La vittoria dimostra l'efficacia della falange di opliti basata sui cittadini-soldati.",
+          "Per la prima volta una polis greca respinge un grande impero orientale." 
         ],
         conseguenze: [
           "Aumenta il prestigio di Atene nel mondo greco.",
-          "Si rafforza la fiducia nelle istituzioni cittadine e nella partecipazione dei cittadini alle armi.",
-          "La Persia prepara una seconda, più vasta spedizione contro la Grecia."
+          "Si rafforza la fiducia nelle istituzioni cittadine e nel ruolo militare dei cittadini.",
+          "La Persia prepara una seconda, più vasta spedizione contro la Grecia." 
         ],
         focus: [
-          "Maratona alimenterà il mito dell'eroismo ateniese e diventerà simbolo della difesa della libertà polis contro il dispotismo."
+          "Maratona diventerà simbolo dell'eroismo ateniese e della difesa della libertà della polis.",
+          "È un momento chiave per la costruzione dell'identità politica ateniese." 
         ]
       },
       {
@@ -603,23 +469,19 @@
         title: "Battaglia di Salamina",
         tags: ["war"],
         era: "Seconda guerra persiana",
-        meta: {
-          luogo: "Stretto di Salamina",
-          categoria: "Guerre e conflitti",
-          paroleChiave: "Temistocle, flotta, triremi"
-        },
         sintesi: [
-          "La flotta greca, guidata politicamente da Temistocle, attira la potente marina persiana nello stretto di Salamina.",
-          "Lo spazio ristretto annulla la superiorità numerica persiana: le agili triremi greche sfruttano meglio il campo di battaglia.",
-          "La vittoria navale impedisce a Serse di assicurarsi il controllo del mare e salva le poleis greche dalla sottomissione."
+          "La flotta greca, guidata politicamente da Temistocle, attira la marina persiana nello stretto di Salamina.",
+          "Lo spazio ristretto annulla la superiorità numerica persiana e favorisce le agili triremi greche.",
+          "La vittoria impedisce a Serse di controllare il mare e salva le poleis greche dalla sottomissione." 
         ],
         conseguenze: [
-          "Atene, che ha fornito la maggior parte delle navi, diventa la principale potenza navale del mondo greco.",
-          "Si consolida il ruolo politico dei rematori, cioè dei ceti popolari, all'interno della democrazia ateniese.",
-          "Si apre la strada alla formazione della Lega di Delo e al predominio ateniese sull'Egeo."
+          "Atene, che fornisce la maggior parte delle navi, diventa la principale potenza navale greca.",
+          "Il peso militare dei rematori accresce il ruolo politico dei ceti popolari nella democrazia ateniese.",
+          "Si apre la strada alla formazione della Lega di Delo e all'egemonia ateniese sull'Egeo." 
         ],
         focus: [
-          "Salamina mostra come la potenza marittima trasformi la democrazia: chi rema combatte, quindi rivendica voce nelle decisioni della polis."
+          "Salamina mostra come la potenza marittima trasformi la struttura sociale e politica di una polis.",
+          "Il mare diventa il vero spazio di potere di Atene classica." 
         ]
       },
       {
@@ -627,24 +489,20 @@
         year: "478 a.C.",
         title: "Fondazione della Lega di Delo",
         tags: ["polis", "war"],
-        era: "Egli anni successivi alle guerre persiane",
-        meta: {
-          luogo: "Isola di Delo",
-          categoria: "Alleanze e potere",
-          paroleChiave: "Egeo, tributi, egemonia"
-        },
+        era: "Gli anni successivi alle guerre persiane",
         sintesi: [
-          "Atene guida la creazione di una lega di poleis greche contro l'eventuale ritorno dei Persiani.",
-          "I membri versano tributi (in navi o denaro) conservati originariamente nel santuario di Delo.",
-          "Col tempo la lega si trasforma da alleanza paritaria a strumento di dominio ateniese sull'Egeo."
+          "Atene guida una lega di poleis per proseguire la guerra offensiva contro la Persia e proteggere l'Egeo.",
+          "I membri versano tributi in navi o denaro, custoditi nel santuario di Delo.",
+          "Col tempo la lega si trasforma da alleanza paritaria a strumento di dominio ateniese." 
         ],
         conseguenze: [
-          "Le risorse dei tributi finanziano flotta, opere pubbliche e vita culturale di Atene.",
-          "Le città che cercano di uscire dalla lega vengono spesso riportate con la forza sotto il controllo ateniese.",
-          "Si alimenta la diffidenza di Sparta e di altre poleis, preparando il terreno ai futuri conflitti."
+          "I tributi finanziano flotta, opere pubbliche e vita culturale di Atene.",
+          "Le città che cercano di uscire dalla lega vengono spesso ricondotte con la forza.",
+          "La diffidenza di Sparta e di altre poleis cresce, preparando il terreno al conflitto." 
         ],
         focus: [
-          "La Lega di Delo è un esempio di come un'alleanza difensiva possa degenerare in impero marittimo."
+          "La Lega di Delo è un esempio di come un'alleanza difensiva possa diventare un impero.",
+          "Mostra il confine sottile tra cooperazione panellenica e dominio di una sola città." 
         ]
       },
       {
@@ -653,23 +511,19 @@
         title: "Età di Pericle",
         tags: ["polis", "culture"],
         era: "Apogeo di Atene",
-        meta: {
-          luogo: "Atene",
-          categoria: "Politica e cultura",
-          paroleChiave: "democrazia radicale, Partenone, misthos"
-        },
         sintesi: [
           "Pericle guida Atene in una fase di potenza economica, militare e culturale senza precedenti.",
-          "Si rafforza la democrazia con misure che favoriscono la partecipazione dei ceti meno abbienti (come il compenso per le cariche pubbliche).",
-          "Si avvia il grande programma edilizio sull'Acropoli, simbolo visivo della potenza ateniese."
+          "La democrazia si rafforza con misure che favoriscono la partecipazione dei ceti meno abbienti (misthos).",
+          "Si avvia il grande programma edilizio sull'Acropoli, simbolo della potenza ateniese." 
         ],
         conseguenze: [
-          "Atene diventa un centro culturale che attrae artisti, filosofi, storici (Fidia, Sofocle, Erodoto, ecc.).",
-          "La sicurezza nelle proprie forze induce Atene a politiche sempre più aggressive verso gli alleati.",
-          "La tensione crescente con Sparta sfocerà nella guerra del Peloponneso."
+          "Atene diventa un centro culturale che attrae artisti, filosofi e storici.",
+          "L'uso spregiudicato delle risorse della lega alimenta il risentimento degli alleati.",
+          "La tensione crescente con Sparta sfocerà nella guerra del Peloponneso." 
         ],
         focus: [
-          "L'età di Pericle rappresenta l'immagine classica della democrazia ateniese, ma porta con sé anche i semi della crisi futura."
+          "L'età di Pericle è l'immagine ideale della democrazia ateniese, ma contiene anche i semi della crisi.",
+          "Consente di collegare politica, architettura, teatro e filosofia in un unico quadro." 
         ]
       },
       {
@@ -678,23 +532,19 @@
         title: "Guerra del Peloponneso",
         tags: ["war"],
         era: "Crisi del mondo greco classico",
-        meta: {
-          luogo: "Grecia intera",
-          categoria: "Guerre e conflitti",
-          paroleChiave: "Atene, Sparta, Tucidide"
-        },
         sintesi: [
           "Conflitto lungo e devastante fra Atene (e il suo impero marittimo) e Sparta (alla guida della Lega del Peloponneso).",
           "La guerra conosce fasi alterne, epidemie (come la peste ad Atene) e colpi di scena politici e militari.",
-          "Tucidide ne offrirà un'analisi lucida, considerata fondamentale per la nascita della storiografia critica."
+          "Tucidide ne offre un'analisi lucida, fondamentale per la storiografia critica." 
         ],
         conseguenze: [
           "Nel 404 a.C. Atene è sconfitta: deve abbattere le Lunghe Mura e consegnare la flotta.",
-          "L'intero mondo greco esce indebolito: risorse economiche e demografiche sono state logorate.",
-          "La rivalità fra poleis non scompare e si aprirà una fase di instabilità e guerre continue."
+          "L'intero mondo greco esce indebolito economicamente e demograficamente.",
+          "La rivalità fra poleis non scompare: si apre una fase di instabilità continua." 
         ],
         focus: [
-          "La guerra del Peloponneso mostra i limiti del sistema delle poleis: nessuna potenza riesce a creare una pace duratura."
+          "La guerra del Peloponneso mostra i limiti del sistema delle poleis rivali.",
+          "È un laboratorio per riflettere sul rapporto fra potere, paura e decisioni collettive." 
         ]
       },
       {
@@ -703,23 +553,19 @@
         title: "Regime dei Trenta Tiranni e restaurazione democratica",
         tags: ["polis"],
         era: "Dopo la sconfitta di Atene",
-        meta: {
-          luogo: "Atene",
-          categoria: "Crisi politica",
-          paroleChiave: "oligarchia, riconciliazione, amnistia"
-        },
         sintesi: [
-          "Dopo la sconfitta, Sparta impone ad Atene un governo oligarchico ristretto, noto come 'Trenta Tiranni'.",
-          "Il regime si rende responsabile di violenze e confische, alimentando il malcontento.",
-          "Nel 403 a.C. i democratici esiliati rientrano e restaurano la democrazia."
+          "Dopo la sconfitta, Sparta impone ad Atene un governo oligarchico ristretto, detto 'Trenta Tiranni'.",
+          "Il regime si rende responsabile di violenze e confische, suscitando opposizione.",
+          "Nel 403 a.C. i democratici rientrano dall'esilio e restaurano la democrazia." 
         ],
         conseguenze: [
           "Viene proclamata un'amnistia generale per evitare una spirale di vendette.",
-          "L'esperienza segna profondamente la memoria politica ateniese e influenzerà i dibattiti successivi.",
-          "Si mostra quanto fragile possa essere l'equilibrio tra libertà politica e sicurezza interna."
+          "L'esperienza lascia una ferita profonda nella memoria politica ateniese.",
+          "Diventa un caso di studio sulla fragilità delle istituzioni democratiche." 
         ],
         focus: [
-          "La scelta dell'amnistia è un caso raro di 'oblio concordato' per ricucire una comunità divisa."
+          "La scelta dell'amnistia è un raro esempio di 'oblio concordato' per ricucire la comunità.",
+          "Permette di discutere il tema della giustizia dopo un regime violento." 
         ]
       },
       {
@@ -728,23 +574,19 @@
         title: "Processo e condanna a morte di Socrate",
         tags: ["culture", "polis"],
         era: "Crisi dei valori ateniesi",
-        meta: {
-          luogo: "Atene",
-          categoria: "Cultura e pensiero",
-          paroleChiave: "filosofia, democrazia, maieutica"
-        },
         sintesi: [
-          "Socrate viene accusato di corrompere i giovani e di introdurre nuovi dei, sintomo delle tensioni morali e politiche del dopoguerra.",
-          "Il filosofo rifiuta di fuggire e accetta la condanna a morte, che verrà eseguita con la cicuta.",
-          "Le opere dei suoi discepoli (soprattutto Platone) trasformeranno questo evento in un simbolo universale."
+          "Socrate è accusato di corrompere i giovani e introdurre nuovi dei, in un clima di sospetto post-bellico.",
+          "Rifiuta di fuggire e accetta la condanna a morte, che verrà eseguita con la cicuta.",
+          "Le opere di Platone e altri discepoli trasformano l'evento in un simbolo universale." 
         ],
         conseguenze: [
-          "Il processo alimenta il dibattito sui limiti della democrazia e sulla responsabilità del cittadino-filosofo.",
+          "Il processo alimenta il dibattito sui limiti della democrazia e sul ruolo del filosofo.",
           "La figura di Socrate segna l'avvio della filosofia classica come ricerca critica radicale.",
-          "La tensione tra verità personale e decisione della maggioranza diventa tema centrale del pensiero politico occidentale."
+          "La tensione tra verità personale e decisione della maggioranza diventa tema centrale del pensiero politico." 
         ],
         focus: [
-          "La morte di Socrate mostra che la polis può temere chi la interroga troppo a fondo: la filosofia diventa coscienza critica."
+          "La morte di Socrate mostra che la polis può temere chi la interroga troppo a fondo.",
+          "È un ponte diretto tra storia, filosofia e educazione civica." 
         ]
       },
       {
@@ -752,24 +594,20 @@
         year: "371 a.C.",
         title: "Battaglia di Leuttra",
         tags: ["war"],
-        era: "Egli anni dell'egemonia tebana",
-        meta: {
-          luogo: "Beozia",
-          categoria: "Guerre e conflitti",
-          paroleChiave: "Tebe, Epaminonda, falange obliqua"
-        },
+        era: "Anni dell'egemonia tebana",
         sintesi: [
-          "L'esercito tebano guidato da Epaminonda sconfigge Sparta, fino ad allora considerata quasi invincibile in campo di battaglia.",
+          "L'esercito tebano guidato da Epaminonda sconfigge Sparta, considerata quasi invincibile in campo aperto.",
           "L'innovazione tattica della 'falange obliqua' concentra le forze nel punto decisivo.",
-          "L'egemonia spartana sul mondo greco viene definitivamente spezzata."
+          "L'egemonia spartana sul mondo greco viene spezzata." 
         ],
         conseguenze: [
           "Per alcuni anni Tebe assume un ruolo di primo piano nella politica greca.",
-          "La continua alternanza di egemonie (Atene, Sparta, Tebe) indebolisce ulteriormente il sistema delle poleis.",
-          "Si apre uno spazio che verrà sfruttato dalla Macedonia di Filippo II."
+          "L'alternanza di egemonie (Atene, Sparta, Tebe) indebolisce ulteriormente il sistema delle poleis.",
+          "Si apre uno spazio che verrà sfruttato dalla Macedonia di Filippo II." 
         ],
         focus: [
-          "Leuttra dimostra che nessuna potenza militare è eterna: nuove tattiche possono rovesciare equilibri consolidati da secoli."
+          "Leuttra dimostra che nessuna potenza militare è eterna.",
+          "Permette di discutere il rapporto fra innovazione tattica e trasformazioni politiche." 
         ]
       },
       {
@@ -778,23 +616,19 @@
         title: "Ascesa di Filippo II di Macedonia",
         tags: ["polis", "war"],
         era: "Preludio all'età ellenistica",
-        meta: {
-          luogo: "Macedonia e Grecia",
-          categoria: "Consolidamento del potere",
-          paroleChiave: "falange macedone, diplomazia, alleanze"
-        },
         sintesi: [
-          "Filippo II riorganizza l'esercito macedone introducendo la lunga lancia (sarissa) e una disciplina ferrea.",
-          "Alterna diplomazia, matrimoni politici e campagne militari per estendere il controllo macedone sulla Grecia.",
-          "Sfrutta le divisioni fra le poleis, ormai stanche di conflitti ma incapaci di unirsi."
+          "Filippo II riorganizza l'esercito macedone introducendo la sarissa e una disciplina ferrea.",
+          "Alterna diplomazia, matrimoni politici e guerre per estendere il controllo sulla Grecia.",
+          "Sfrutta le divisioni fra le poleis, incapaci di unirsi stabilmente." 
         ],
         conseguenze: [
           "La Macedonia diventa la nuova potenza egemone della Grecia.",
-          "Filippo prepara il progetto di una grande spedizione contro la Persia, che verrà realizzato dal figlio Alessandro.",
-          "La conquista macedone segna la fine dell'indipendenza politica delle poleis classiche."
+          "Filippo prepara il progetto di una grande spedizione contro la Persia.",
+          "La conquista macedone segna la fine dell'indipendenza politica delle poleis classiche." 
         ],
         focus: [
-          "Filippo II unisce forza militare e abilità politica: la 'barbara' Macedonia si presenta come garante dell'ordine greco."
+          "Filippo II unisce forza militare e abilità diplomatica.",
+          "È la figura che traghetta il mondo greco verso una nuova scala di potere." 
         ]
       },
       {
@@ -802,198 +636,185 @@
         year: "338 a.C.",
         title: "Battaglia di Cheronea",
         tags: ["war"],
-        era: "Al tramonto della Grecia classica",
-        meta: {
-          luogo: "Beozia",
-          categoria: "Guerre e conflitti",
-          paroleChiave: "Filippo II, Alessandро, Lega di Corinto"
-        },
+        era: "Tramonto della Grecia classica",
         sintesi: [
           "Le truppe macedoni di Filippo II sconfiggono la coalizione di Atene e Tebe.",
-          "Alessandro, figlio di Filippo, partecipa alla battaglia guidando l'ala macedone.",
-          "La vittoria apre la strada al controllo macedone sull'intera Grecia."
+          "Alessandro, figlio di Filippo, partecipa alla battaglia guidando una delle ali dell'esercito.",
+          "La vittoria apre la strada al controllo macedone sull'intera Grecia." 
         ],
         conseguenze: [
-          "Si forma la Lega di Corinto, un'alleanza delle poleis sotto la guida di Filippo, formalmente paritaria ma di fatto subordinata.",
-          "Le poleis mantengono una certa autonomia interna ma perdono la libertà di condurre una politica estera indipendente.",
-          "Il progetto della spedizione contro l'impero persiano viene approvato a livello panellenico."
+          "Si forma la Lega di Corinto, alleanza delle poleis sotto la guida di Filippo.",
+          "Le città mantengono una certa autonomia interna ma perdono la libertà in politica estera.",
+          "Il progetto della spedizione contro l'impero persiano viene approvato come impresa comune." 
         ],
         focus: [
-          "Cheronea è spesso considerata la 'fine' della Grecia classica come sistema di città indipendenti."
+          "Cheronea è spesso considerata la 'fine' della Grecia classica come sistema di città indipendenti.",
+          "È il punto di passaggio fra storia delle poleis e storia degli imperi ellenistici." 
         ]
       },
       {
-        id: "alessandro-conquiste",
+        id: "alessandro",
         year: "334-323 a.C.",
         title: "Conquiste di Alessandro Magno",
         tags: ["war", "culture"],
         era: "Passaggio all'età ellenistica",
-        meta: {
-          luogo: "Dalla Grecia all'India",
-          categoria: "Espansione imperiale",
-          paroleChiave: "Issos, Gaugamela, fusione culturale"
-        },
         sintesi: [
-          "Alessandro, succeduto al padre nel 336 a.C., dà avvio a una serie di campagne che abbattono l'impero persiano.",
+          "Alessandro, succeduto al padre nel 336 a.C., abbatte l'impero persiano con una serie di campagne fulminee.",
           "Fondazione di numerose città (spesso chiamate Alessandria) e apertura di nuove vie di comunicazione.",
-          "L'incontro tra cultura greca e civiltà orientali genera un mondo nuovo, vasto e complesso."
+          "L'incontro tra cultura greca e civiltà orientali genera un mondo nuovo e multicentrico." 
         ],
         conseguenze: [
           "La cultura greca si diffonde dall'Egitto all'Asia centrale, mescolandosi con tradizioni locali.",
-          "Nascono nuovi centri culturali (come Alessandria d'Egitto) che superano le poleis tradizionali.",
-          "Alla morte di Alessandro (323 a.C.) il suo impero si divide fra i diadochi, ma l'eredità culturale resta."
+          "Nascono nuovi centri culturali che superano il modello della polis (come Alessandria d'Egitto).",
+          "Alla morte di Alessandro (323 a.C.) l'impero si divide tra i diadochi, ma l'eredità culturale resta." 
         ],
         focus: [
-          "Le conquiste di Alessandro chiudono l'età classica ma aprono l'età ellenistica, in cui 'essere greci' non significa più vivere in una piccola polis."
+          "Le conquiste di Alessandro chiudono l'età classica ma aprono l'età ellenistica.",
+          "Permettono di discutere cosa significa 'essere greci' in un mondo ormai vasto e mescolato." 
         ]
       }
     ];
 
-    const timelineList = document.getElementById("timeline-list");
-    const detailContent = document.getElementById("detail-content");
-    const detailYearLabel = document.getElementById("detail-year-label");
+    const eventsList = document.getElementById("events-list");
+    const detailBody = document.getElementById("detail-body");
+    const detailHeader = document.getElementById("detail-header");
+    const detailYearLine = document.getElementById("detail-year-line");
 
-    function createTagElements(tags) {
-      const container = document.createElement("div");
-      container.className = "timeline-tags";
-
-      tags.forEach(tag => {
-        const span = document.createElement("span");
-        span.classList.add("tag");
-        if (tag === "war") span.classList.add("tag-war");
-        if (tag === "polis") span.classList.add("tag-polis");
-        if (tag === "culture") span.classList.add("tag-culture");
-
-        if (tag === "war") span.textContent = "Conflitti";
-        else if (tag === "polis") span.textContent = "Poleis e istituzioni";
-        else if (tag === "culture") span.textContent = "Cultura e pensiero";
-        else span.textContent = tag;
-
-        container.appendChild(span);
-      });
-
-      return container;
+    function createTagLabel(tag) {
+      if (tag === "war") return "Conflitti";
+      if (tag === "polis") return "Poleis e istituzioni";
+      if (tag === "culture") return "Cultura e pensiero";
+      return tag;
     }
 
-    function renderTimeline() {
+    function renderEvents() {
       events.forEach((event, index) => {
-        const item = document.createElement("button");
-        item.type = "button";
-        item.className = "timeline-item" + (index === 0 ? " active" : "");
-        item.setAttribute("data-id", event.id);
-        item.setAttribute("aria-label", `${event.year} - ${event.title}`);
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "event-button" + (index === 0 ? " active" : "");
+        btn.dataset.id = event.id;
 
         const inner = document.createElement("div");
-        inner.className = "timeline-item-inner";
+        inner.className = "event-button-inner";
 
-        const yearEl = document.createElement("div");
-        yearEl.className = "timeline-year";
-        yearEl.textContent = event.year;
+        const radio = document.createElement("div");
+        radio.className = "event-radio";
+        const radioDot = document.createElement("div");
+        radioDot.className = "event-radio-dot";
+        radio.appendChild(radioDot);
 
-        const titleEl = document.createElement("div");
-        titleEl.className = "timeline-title";
-        titleEl.textContent = event.title;
+        const meta = document.createElement("div");
+        meta.className = "event-meta";
+        const year = document.createElement("div");
+        year.className = "event-year";
+        year.textContent = event.year;
+        const title = document.createElement("div");
+        title.className = "event-title";
+        title.textContent = event.title;
 
-        inner.appendChild(yearEl);
-        inner.appendChild(titleEl);
-        inner.appendChild(createTagElements(event.tags));
+        const tagsWrap = document.createElement("div");
+        tagsWrap.className = "event-tags";
+        event.tags.forEach(tag => {
+          const span = document.createElement("span");
+          span.className = "event-tag";
+          if (tag === "war") span.classList.add("event-tag--war");
+          if (tag === "polis") span.classList.add("event-tag--polis");
+          if (tag === "culture") span.classList.add("event-tag--culture");
+          span.textContent = createTagLabel(tag);
+          tagsWrap.appendChild(span);
+        });
 
-        item.appendChild(inner);
-        timelineList.appendChild(item);
+        meta.appendChild(year);
+        meta.appendChild(title);
+        meta.appendChild(tagsWrap);
+
+        const arrow = document.createElement("div");
+        arrow.className = "event-arrow";
+        arrow.textContent = "▾";
+
+        inner.appendChild(radio);
+        inner.appendChild(meta);
+        inner.appendChild(arrow);
+
+        btn.appendChild(inner);
+        eventsList.appendChild(btn);
       });
     }
 
     function renderDetail(event) {
-      detailContent.innerHTML = "";
+      detailHeader.querySelector(".detail-era").textContent = event.era;
+      detailHeader.querySelector(".detail-title").textContent = event.title;
+      detailYearLine.textContent = event.year;
 
-      const eraEl = document.createElement("div");
-      eraEl.className = "detail-era";
-      eraEl.textContent = event.era;
+      detailBody.innerHTML = "";
 
-      const titleEl = document.createElement("h3");
-      titleEl.className = "detail-title";
-      titleEl.textContent = `${event.year} – ${event.title}`;
+      const sintTitle = document.createElement("div");
+      sintTitle.className = "detail-section-title";
+      sintTitle.textContent = "Che cosa succede";
 
-      const metaEl = document.createElement("div");
-      metaEl.className = "detail-meta";
-      metaEl.innerHTML = `
-        <span><strong>Luogo</strong> ${event.meta.luogo}</span>
-        <span><strong>Categoria</strong> ${event.meta.categoria}</span>
-        <span><strong>Parole chiave</strong> ${event.meta.paroleChiave}</span>
-      `;
-
-      const sintesiTitle = document.createElement("div");
-      sintesiTitle.className = "detail-block-title";
-      sintesiTitle.textContent = "Che cosa succede";
-
-      const sintesiList = document.createElement("ul");
-      sintesiList.className = "bullet-list";
-      event.sintesi.forEach(text => {
+      const sintList = document.createElement("ul");
+      sintList.className = "detail-list";
+      event.sintesi.forEach(t => {
         const li = document.createElement("li");
-        li.textContent = text;
-        sintesiList.appendChild(li);
+        li.textContent = t;
+        sintList.appendChild(li);
       });
 
-      const conseguenzeTitle = document.createElement("div");
-      conseguenzeTitle.className = "detail-block-title";
-      conseguenzeTitle.textContent = "Perché è importante";
+      const consTitle = document.createElement("div");
+      consTitle.className = "detail-section-title";
+      consTitle.textContent = "Perché è importante";
 
-      const conseguenzeList = document.createElement("ul");
-      conseguenzeList.className = "bullet-list";
-      event.conseguenze.forEach(text => {
+      const consList = document.createElement("ul");
+      consList.className = "detail-list";
+      event.conseguenze.forEach(t => {
         const li = document.createElement("li");
-        li.textContent = text;
-        conseguenzeList.appendChild(li);
+        li.textContent = t;
+        consList.appendChild(li);
       });
 
       const focusTitle = document.createElement("div");
-      focusTitle.className = "detail-block-title";
+      focusTitle.className = "detail-section-title";
       focusTitle.textContent = "Focus per lo studio";
 
-      const grid = document.createElement("div");
-      grid.className = "detail-grid";
-      event.focus.forEach(text => {
-        const chip = document.createElement("div");
-        chip.className = "detail-chip";
-        chip.textContent = text;
-        grid.appendChild(chip);
+      const focusGrid = document.createElement("div");
+      focusGrid.className = "detail-focus-grid";
+      event.focus.forEach(t => {
+        const el = document.createElement("div");
+        el.className = "detail-focus-item";
+        el.textContent = t;
+        focusGrid.appendChild(el);
       });
 
-      const quote = document.createElement("div");
-      quote.className = "detail-quote";
-      quote.textContent = "Usa questa scheda come base: prima capisci la sequenza, poi collega gli eventi ai testi e ai personaggi che studi in letteratura e filosofia.";
+      const note = document.createElement("div");
+      note.className = "detail-note";
+      note.textContent = "Suggerimento: prova a seguire la sequenza completa e a collegare ogni evento a ciò che studi in letteratura, filosofia e educazione civica.";
 
-      detailContent.appendChild(eraEl);
-      detailContent.appendChild(titleEl);
-      detailContent.appendChild(metaEl);
-      detailContent.appendChild(sintesiTitle);
-      detailContent.appendChild(sintesiList);
-      detailContent.appendChild(conseguenzeTitle);
-      detailContent.appendChild(conseguenzeList);
-      detailContent.appendChild(focusTitle);
-      detailContent.appendChild(grid);
-      detailContent.appendChild(quote);
-
-      detailYearLabel.textContent = event.year;
+      detailBody.appendChild(sintTitle);
+      detailBody.appendChild(sintList);
+      detailBody.appendChild(consTitle);
+      detailBody.appendChild(consList);
+      detailBody.appendChild(focusTitle);
+      detailBody.appendChild(focusGrid);
+      detailBody.appendChild(note);
     }
 
-    function onTimelineClick(e) {
-      const target = e.target.closest(".timeline-item");
-      if (!target) return;
+    function onEventClick(e) {
+      const btn = e.target.closest(".event-button");
+      if (!btn) return;
 
-      const id = target.getAttribute("data-id");
+      const id = btn.dataset.id;
       const event = events.find(ev => ev.id === id);
       if (!event) return;
 
-      document.querySelectorAll(".timeline-item").forEach(item => {
-        item.classList.toggle("active", item === target);
+      document.querySelectorAll(".event-button").forEach(b => {
+        b.classList.toggle("active", b === btn);
       });
 
       renderDetail(event);
     }
 
-    renderTimeline();
-    timelineList.addEventListener("click", onTimelineClick);
+    renderEvents();
+    eventsList.addEventListener("click", onEventClick);
 
     if (events.length > 0) {
       renderDetail(events[0]);
@@ -1001,4 +822,3 @@
   </script>
 </body>
 </html>
-
